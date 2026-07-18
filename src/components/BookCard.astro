@@ -1,0 +1,19 @@
+---
+interface Props {
+  cover: string;
+  title: string;
+  author: string;
+  note: string;
+}
+
+const { cover, title, author, note } = Astro.props;
+---
+
+<div class="book-card">
+  <img src={cover} alt={title} class="book-cover" loading="lazy" />
+  <div class="book-info">
+    <div class="label">{author}</div>
+    <h3>{title}</h3>
+    <p>{note}</p>
+  </div>
+</div>

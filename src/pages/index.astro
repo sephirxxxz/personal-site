@@ -1,17 +1,330 @@
 ---
+import '../styles/global.css';
+import Card from '../components/Card.astro';
+import BookCard from '../components/BookCard.astro';
 
+const title = '李潇然 | 项目、笔记和判断';
+const description = '在 AI 工具、一级市场和判断写作之间做快速原型的人。不是简历，是一张工作台。';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="vertical-signature" aria-hidden="true">
+      <span>sephirx</span>
+    </div>
+    <div class="container">
+      <!-- Hero -->
+      <section id="hero">
+        <h1>李潇然</h1>
+        <p class="subtitle">会用 AI 工具，热爱探索科技产品，习惯在不舒服的场景里学习适应的人。不是简历，是一张工作台。</p>
+        <div class="hero-tags">
+          <span class="tag">AI Build</span>
+          <span class="tag">Method Sort</span>
+          <span class="tag">Product Compress</span>
+          <span class="tag">Research Judge</span>
+          <span class="tag">Review Proof</span>
+        </div>
+      </section>
+
+      <!-- 我是谁 -->
+      <section id="about">
+        <h2>我是谁</h2>
+        <Card>
+          <p>大二学生，第一份实习直接进了 FA 交易现场。</p>
+          <p>关注 AI 软件、公司研究、投资判断和 tools for thought。相信好的工作来自"少而深"的判断，而不是堆材料。</p>
+        </Card>
+      </section>
+
+      <!-- 我在做什么 -->
+      <section id="doing">
+        <h2>我在做什么</h2>
+        <div class="card-grid">
+          <Card title="明论资本 · FA 实习生" label="实习">
+            <p>跟 GP 做前端 deal sourcing。用 X-mapper / AI-mapper-agentic 发现 AI 项目和人才线索，用 Exa 给 Agent 提供搜索输入，用 Context Mode 优化上下文处理，把"值得 reach"的判断沉淀成可复用规则。</p>
+            <p>这是第一份实习，核心目标是走出舒适区：从学生作业模式切换到"交付真实业务结果"模式。</p>
+          </Card>
+
+          <Card title="Finance Expert Team" label="项目">
+            <p>多 agent 投资研究检查清单，覆盖基本面、技术面、新闻情绪、风险、组合视角和报告输出。目标是减少确认偏误，让分数背后的假设、证据质量和分歧可被审查。</p>
+          </Card>
+
+          <Card title="GeWu inquiro" label="项目">
+            <p>记忆与主动学习工具。导入材料、提取知识节点、构建下一步学习路径、恢复上下文。真正中断的不是资料，而是学习的上下文。</p>
+          </Card>
+
+          <Card title="Pet Travel App" label="项目">
+            <p>学校资助的创业项目，最终失败。需求看起来清晰，但供应、履约和线下运营太重。学到的核心一课：有需求不等于有商业模式。</p>
+          </Card>
+
+          <Card title="US Stock Investing" label="项目">
+            <p>用真金白银测试对 AI 基础设施、财报、竞争、估值和叙事的判断，包括 NVIDIA 研究。写判断和真正买入不是一回事。</p>
+          </Card>
+        </div>
+      </section>
+
+      <!-- 我相信什么 -->
+      <section id="focus">
+        <h2>我相信什么</h2>
+        <div class="card-grid">
+          <Card title="AI 的工作流压缩">
+            <p>哪些复杂工作会被 AI 压缩成"一句话一个结果"？我在找那些工作流程会被重新定义的赛道。</p>
+          </Card>
+          <Card title="founder 的稀缺性">
+            <p>想法不值钱，能把想法变成垄断的人稀缺。我看 founder 看的是学习速度、对痛苦的耐受度和对权力的清醒。</p>
+          </Card>
+          <Card title="垄断的来源">
+            <p>技术是借口，垄断才是结果。网络效应、规模效应、品牌、10x 技术，到底哪一种在这个项目里成立？</p>
+          </Card>
+          <Card title="判断的复用">
+            <p>怎么把一次判断变成下一次的输入？我在搭一套可记录、可验证、可迭代的判断系统。</p>
+          </Card>
+        </div>
+      </section>
+
+      <!-- 我关注的 startups -->
+      <section id="startups">
+        <h2>我关注的 startups</h2>
+        <div class="card-grid">
+          <Card title="Cursor">
+            <p>AI-native IDE，让一个人能指挥 agent 完成越来越大的工程。我关注它不是因为它是 AI 编程，而是因为它在扩展"一个人能做多大事"的边界。</p>
+          </Card>
+
+          <Card title="Perplexity">
+            <p>答案引擎，把搜索变成可直接使用的判断起点。我关注它是因为它改变了"知识获取"的交互范式。</p>
+          </Card>
+
+          <Card title="Replit">
+            <p>从在线 IDE 转向 agent 驱动的软件开发平台。我关注它是因为它在验证"公司能不能自己编程"这个极端假设。</p>
+          </Card>
+
+          <Card title="Scale AI">
+            <p>数据标注基础设施，AI 训练背后的铲子。我关注它是因为它证明了 AI 时代最稳的钱可能不在模型层，而在让模型变好的基础设施层。</p>
+          </Card>
+
+          <Card title="Harvey">
+            <p>AI for legal，从律所工作流程切入。我关注它是因为它选了一个"高价值、高壁垒、但传统软件很难啃"的垂直领域。</p>
+          </Card>
+        </div>
+      </section>
+
+      <!-- 工作流 -->
+      <section id="workflow">
+        <h2>工作流</h2>
+        <div class="card-grid">
+          <Card title="信息流">
+            <p>少即是多。一天只看几篇高质量文章和行业研报，不刷大量自媒体。剩下的时间留给经典的书。</p>
+            <p>信息摄入的质量决定判断质量，数量不决定。</p>
+          </Card>
+
+          <Card title="AI 工具配置">
+            <p>Cloud Code + CCS（配置模型 API 的插件），连接 KIMI、GPT 等基座模型。搜索用 Exa，上下文管理用 Context Mode，知识库在 Notion。自己写了 Xmapper、AI Mapper Agentic（触达初创团队和早期项目）、Finance Expert Team 等 skills。</p>
+            <img src="/images/idea-demo-final.png" alt="idea to final" style="width: 100%; border-radius: 8px; margin-top: 12px;" />
+          </Card>
+        </div>
+      </section>
+
+      <!-- 年度推荐 -->
+      <section id="featured-books">
+        <h2>年度推荐</h2>
+        <div class="book-scroll">
+          <BookCard
+            cover="/covers/zero-to-one.jpg"
+            title="Zero to One"
+            author="Peter Thiel"
+            note="真正从 0 到 1 的创业不是找到一个 idea，而是找到一个别人还没看到的 secret，并用一个可闭环的结构把它变成垄断。这让我看项目时先问'这件事的商业逻辑能不能自己闭环'，再问'它能做多大'。"
+          />
+
+          <BookCard
+            cover="/covers/hard-thing.jpg"
+            title="The Hard Thing About Hard Things"
+            author="Ben Horowitz"
+            note="创业没有公式，CEO 最难的是管理自己的心理，并在绝境中做那些没人愿意做的决定。评估创始人不能只看增长曲线，而要看他在低谷中的行动质量。"
+          />
+
+          <BookCard
+            cover="/covers/founder-dilemmas.jpg"
+            title="The Founder's Dilemmas"
+            author="Noam Wasserman"
+            note="每个创始人都在 Rich（财富最大化）和 King（控制权）之间做选择，早期每一个决定都会锁定后续路径。看 cap table 和条款时，先问'这个 founder 到底想要什么'。"
+          />
+        </div>
+      </section>
+
+      <!-- 其他在读 -->
+      <section id="more-books">
+        <h2>其他在读</h2>
+        <div class="book-scroll">
+          <BookCard
+            cover="/covers/power-law.jpg"
+            title="The Power Law"
+            author="Sebastian Mallaby"
+            note="VC 行业的本质是幂律，一个基金的成败往往只由 1–2 笔投资决定。理解了为什么 VC 不接'好公司'，只接'可能成为唯一赢家'的公司。"
+          />
+
+          <BookCard
+            cover="/covers/venture-deals.jpg"
+            title="Venture Deals"
+            author="Brad Feld & Jason Mendelson"
+            note="Term sheet 只关心两件事——economics（回报）和 control（控制）。拆条款时先归类：这是经济条款还是控制条款。"
+          />
+
+          <BookCard
+            cover="/covers/secrets-sand-hill.jpg"
+            title="Secrets of Sand Hill Road"
+            author="Scott Kupor"
+            note="VC 不是神秘行业，它的行为由 LP-GP 结构、基金存续期和 carry 机制决定。把 VC 的决策从'个人偏好'还原成'制度激励'。"
+          />
+
+          <BookCard
+            cover="/covers/paypal-wars.jpg"
+            title="The PayPal Wars"
+            author="Eric Jackson"
+            note="PayPal 的成功不是源于完美战略，而是源于高压下的快速迭代和一群愿意打仗的人。更关注早期团队的战斗力和应变能力，而不是 BP 上的计划。"
+          />
+        </div>
+      </section>
+
+      <!-- 最近在想 -->
+      <section id="thinking">
+        <h2>最近在想</h2>
+
+        <h3 class="section-subtitle">我读到的</h3>
+        <div class="card-grid">
+          <Card title="The Self-Driving Company" label="Amjad Masad">
+            <p>真正被替代的不是基层员工，而是中层管理者。当 agent 能跨系统调度时，公司不再需要那么多"传话和协调"的人。</p>
+          </Card>
+
+          <Card title="On Grindslop" label="Will Manidis">
+            <p>Grind culture 往往是系统无能的遮羞布。真正的效率来自清晰的优先级和可复用的流程，而不是把自己活成公司的人肉电池。</p>
+          </Card>
+
+          <Card title="human data market" label="Ali Ansari">
+            <p>值钱的可能不是"数据"，而是"人类在不知道自己被观察时的真实行为"。一旦人意识到自己被记录，数据就开始失真。</p>
+          </Card>
+
+          <Card title="AI's Biggest Winners" label="Daniel Kornum">
+            <p>AI 不是在"帮助"低利润率企业，而是在"收编"它们。科技公司将成为实体经济的事实操作系统层。</p>
+          </Card>
+
+          <Card title="America vs Shenzhen" label="Zane Hengsperger">
+            <p>深圳的优势不是工厂密度，而是"失败成本低"。美国的监管、工会和供应链分散让这个成本结构很难复制。</p>
+          </Card>
+
+          <Card title="The Most Human Technology" label="Anish Acharya">
+            <p>AI 时代真正稀缺的可能是"亲手制造的笨拙感"。当 AI 能完美生成一切时，不完美的人类手作会变成身份象征。</p>
+          </Card>
+
+          <Card title="Math Mafia" label="Jesse Zhang">
+            <p>奥赛背景的人成为创始人，不只是因为聪明。他们从小在高压、没有标准答案的环境里训练过，能在长期没有正反馈的情况下继续推进。上一代创始人需要韧性，这一代需要能在更高竞争密度下持续扛压的能力。</p>
+          </Card>
+
+          <Card title="Your AI's Memory" label="Matt Van Horn">
+            <p>问题不是记忆太多，而是我们把"记忆"和"知识"混为一谈。记忆是私人的、上下文依赖的；知识是可迁移、可验证的。</p>
+          </Card>
+
+          <Card title="Defining Taste" label="Mitchell Hashimoto">
+            <p>Taste 的本质是"信息压缩能力"。有 taste 的人能在海量选项里快速识别出"对的那个"。</p>
+          </Card>
+
+          <Card title="World-Building Doors" label="Josh Elman">
+            <p>门是开了，但大多数人还在用旧地图找新大陆。真正的机会属于"重新定义一个人 + AI 能做什么"的人。</p>
+          </Card>
+
+          <Card title="New Media, One Year In" label="Erik Torenberg">
+            <p>这不是媒体，这是"被投公司的武器化叙事基础设施"。在信息过载时代，VC 还要帮你制造共识、占领注意力。</p>
+          </Card>
+        </div>
+
+        <h3 class="section-subtitle">短判断</h3>
+        <div class="card-grid">
+          <Card label="2026-05-01">
+            <p>AI 软件还在早期阶段，先活下来。</p>
+          </Card>
+          <Card label="2026-04-11">
+            <p>先问哪个关键约束会被解除。</p>
+          </Card>
+          <Card label="2026-03-26">
+            <p>Context 可能不是长期护城河。</p>
+          </Card>
+          <Card label="2026-03-15">
+            <p>公司可能会从文件系统走向 agent 系统。</p>
+          </Card>
+          <Card label="2026-03-03">
+            <p>最有价值的资产可能是 md 文件。</p>
+          </Card>
+          <Card label="2026-03-18">
+            <p>AI 落地的难点不只在模型。</p>
+          </Card>
+        </div>
+
+        <h3 class="section-subtitle">Substack 笔记</h3>
+        <div class="card-grid">
+          <Card title="同一个 Claude，两种打开方式">
+            <p>比较 chat 和 CLI 两种入口，更在意持久化、可恢复性和可审查性。</p>
+          </Card>
+          <Card title="现在是买入 NVIDIA 的好时机吗？">
+            <p>区分好公司和好价格，讨论护城河、需求、估值、预期和反转条件。写判断和真正买入不是一回事。</p>
+          </Card>
+        </div>
+      </section>
+
+      <!-- 我喜欢什么 -->
+      <section id="likes">
+        <h2>我喜欢什么</h2>
+        <div class="card-grid">
+          <Card title="🎬 剧">
+            <p>权力的游戏 · 龙之家族 · 继承之战 · 亿万 · 王冠 · 纸牌屋 · 浴血黑帮 · 太平洋战争 · 海豹突击队 · 唐顿庄园 · 金装律师 · 盾牌 · 后翼弃兵 · 钢铁侠 · 蝙蝠侠 · 漫威</p>
+          </Card>
+
+          <Card title="🎵 音乐">
+            <p>Hip Hop · 东海岸</p>
+          </Card>
+
+          <Card title="🏎️ 运动">
+            <p>网球 · F1 · 车轮贴墙的极限感</p>
+          </Card>
+
+          <Card title="🚗 车">
+            <p>911 GT3 RS · Aventador SVJ · Huayra</p>
+          </Card>
+
+          <Card title="🏙️ 城市">
+            <p>香港</p>
+          </Card>
+
+          <Card title="🎮 游戏">
+            <p>PUBG</p>
+          </Card>
+
+          <Card title="☕ 咖啡">
+            <p>每天必备</p>
+          </Card>
+
+          <Card title="🏁 短期目标">
+            <p>搭一个四轴赛车模拟器</p>
+          </Card>
+        </div>
+      </section>
+
+      <!-- 联系 -->
+      <section id="contact">
+        <h2>联系</h2>
+        <Card>
+          <p>如果你在构建 AI 工具、研究公司、或想聊聊最近读的书，可以发邮件或加我微信。</p>
+          <a href="mailto:sephirxxxz@gmail.com" class="contact-email">sephirxxxz@gmail.com</a>
+          <p style="margin-top: 12px; color: var(--text-secondary);">微信：19816894652</p>
+        </Card>
+
+        <p class="footer-note">Built with Astro. Not a resume. A workbench.</p>
+      </section>
+    </div>
+  </body>
 </html>
