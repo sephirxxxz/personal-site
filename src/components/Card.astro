@@ -2,12 +2,14 @@
 interface Props {
   title?: string;
   label?: string;
+  variant?: 'default' | 'featured' | 'secondary';
 }
 
-const { title, label } = Astro.props;
+const { title, label, variant = 'default' } = Astro.props;
+const variantClass = variant === 'default' ? '' : ` card--${variant}`;
 ---
 
-<div class="card">
+<div class={`card${variantClass}`}>
   {label && <div class="label">{label}</div>}
   {title && <h3>{title}</h3>}
   <slot />
