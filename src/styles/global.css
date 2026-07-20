@@ -322,8 +322,39 @@ h2 {
   letter-spacing: -0.025em;
 }
 
-h2.section-title {
-  color: var(--ink);
+#focus h2 {
+  border-bottom-color: #db2777;
+}
+
+#startups h2 {
+  border-bottom-color: #ea580c;
+}
+
+#workflow h2 {
+  border-bottom-color: #16a34a;
+}
+
+#focus h2::after,
+#startups h2::after,
+#workflow h2::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+  width: clamp(18px, 3vw, 28px);
+  height: 5px;
+}
+
+#focus h2::after {
+  background: color-mix(in srgb, #db2777 70%, #000);
+}
+
+#startups h2::after {
+  background: color-mix(in srgb, #ea580c 70%, #000);
+}
+
+#workflow h2::after {
+  background: color-mix(in srgb, #16a34a 70%, #000);
 }
 
 #doing h2,
@@ -383,15 +414,16 @@ p:last-child {
 .card {
   min-height: 150px;
   padding: 20px 0 28px clamp(18px, 3vw, 32px);
-  border-top: 1px solid var(--line);
+  border-top: 3px solid var(--line);
   transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card::before {
   content: "";
   position: absolute;
-  top: -1px;
+  top: -3px;
   left: 0;
+  z-index: 2;
   width: 10px;
   height: 10px;
   background: var(--ink);
@@ -400,6 +432,69 @@ p:last-child {
 .card:hover {
   background: color-mix(in oklch, var(--wash) 28%, transparent);
   transform: translateX(6px);
+}
+
+#focus .card::after,
+#startups .card::after,
+#workflow .card::after,
+.card[class*="card--accent-"]::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 3px;
+}
+
+#focus .card::after {
+  background: transparent;
+}
+
+#startups .card::after {
+  background: transparent;
+}
+
+#workflow .card::after {
+  background: transparent;
+}
+
+.card--accent-blue::after,
+.card--accent-indigo::after,
+.card--accent-red::after,
+.card--accent-orange::after,
+.card--accent-green::after,
+.card--accent-amber::after,
+.card--accent-pink::after,
+.card--accent-purple::after,
+.card--accent-teal::after,
+.card--accent-crimson::after {
+  background: transparent;
+}
+
+#focus .card::before {
+  background: #db2777;
+}
+
+#startups .card::before {
+  background: #ea580c;
+}
+
+#workflow .card::before {
+  background: #16a34a;
+}
+
+.card--accent-blue::before,
+.card--accent-indigo::before,
+.card--accent-red::before,
+.card--accent-orange::before,
+.card--accent-green::before,
+.card--accent-amber::before,
+.card--accent-pink::before,
+.card--accent-purple::before,
+.card--accent-teal::before,
+.card--accent-crimson::before {
+  background: #db2777;
 }
 
 .card--featured,
@@ -445,6 +540,18 @@ p:last-child {
 
 .section-subtitle:nth-of-type(even) {
   margin-left: clamp(34px, 9vw, 136px);
+}
+
+#focus .section-subtitle {
+  background: linear-gradient(to right, rgba(219, 39, 119, 0.18) 0 72%, transparent 72%);
+}
+
+#startups .section-subtitle {
+  background: linear-gradient(to right, rgba(234, 88, 12, 0.18) 0 72%, transparent 72%);
+}
+
+#workflow .section-subtitle {
+  background: linear-gradient(to right, rgba(22, 163, 74, 0.18) 0 72%, transparent 72%);
 }
 
 .article-subtitle {
@@ -603,7 +710,19 @@ p:last-child {
 
 .section-progress a.active {
   background: var(--ink);
-  transform: scaleX(2.1);
+  transform: scaleX(2.6);
+}
+
+.section-progress a.progress-blue.active {
+  background: #db2777;
+}
+
+.section-progress a.progress-orange.active {
+  background: #ea580c;
+}
+
+.section-progress a.progress-green.active {
+  background: #16a34a;
 }
 
 @media (max-width: 900px) {

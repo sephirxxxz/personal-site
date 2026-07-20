@@ -3,13 +3,15 @@ interface Props {
   title?: string;
   label?: string;
   variant?: 'default' | 'featured' | 'secondary';
+  accent?: string;
 }
 
-const { title, label, variant = 'default' } = Astro.props;
+const { title, label, variant = 'default', accent } = Astro.props;
 const variantClass = variant === 'default' ? '' : ` card--${variant}`;
+const accentClass = accent ? ` card--accent-${accent}` : '';
 ---
 
-<div class={`card${variantClass}`}>
+<div class={`card${variantClass}${accentClass}`}>
   {label && <div class="label">{label}</div>}
   {title && <h3>{title}</h3>}
   <slot />
