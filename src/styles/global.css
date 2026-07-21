@@ -1,6 +1,6 @@
 :root {
-  --paper: oklch(97% 0.003 250);
-  --surface: oklch(99.3% 0 0);
+  --paper: oklch(91.8% 0.014 85);
+  --surface: oklch(95.2% 0.011 85);
   --ink: oklch(16% 0 0);
   --ink-soft: oklch(35% 0.008 250);
   --muted: oklch(52% 0.008 250);
