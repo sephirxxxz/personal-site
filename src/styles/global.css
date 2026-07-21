@@ -317,7 +317,11 @@ h2 {
   margin-bottom: clamp(28px, 5vw, 52px);
   padding: 0 14px 8px 0;
   border-bottom: 5px solid var(--ink);
-  color: var(--ink);
+  color: color-mix(in oklch, var(--surface) 91%, var(--ink));
+  text-shadow:
+    -1px -1px 0 color-mix(in oklch, white 82%, transparent),
+    1px 1px 1px color-mix(in oklch, var(--ink) 24%, transparent),
+    2px 2px 3px color-mix(in oklch, var(--ink) 8%, transparent);
   font-size: clamp(2.2rem, 5vw, 3.8rem);
   letter-spacing: -0.025em;
 }
