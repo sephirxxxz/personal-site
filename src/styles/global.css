@@ -302,6 +302,31 @@ h1 {
   text-transform: uppercase;
 }
 
+.filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.hand-circle {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+
+.hand-circle::after {
+  content: "";
+  position: absolute;
+  inset: -0.22em -0.42em;
+  border: 2.5px solid var(--ink);
+  border-radius: 50%;
+  filter: url(#hand-circle);
+  opacity: 0.9;
+  pointer-events: none;
+  transform: rotate(-2deg);
+}
+
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
