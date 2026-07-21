@@ -13,6 +13,6 @@ const accentClass = accent ? ` card--accent-${accent}` : '';
 
 <div class={`card${variantClass}${accentClass}`}>
   {label && <div class="label">{label}</div>}
-  {title && <h3>{title}</h3>}
+  {title && <h3><Fragment set:html={title} /></h3>}
   <slot />
 </div>
