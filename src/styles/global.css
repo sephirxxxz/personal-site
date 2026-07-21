@@ -38,6 +38,31 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.site-bg__text {
+  color: color-mix(in oklch, var(--ink) 7%, transparent);
+  font-family: var(--font-sans);
+  font-size: clamp(7rem, 28vw, 22rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 0.85;
+  text-shadow:
+    10px 10px 0 color-mix(in oklch, var(--ink) 4%, transparent),
+    22px 22px 0 color-mix(in oklch, var(--ink) 2%, transparent),
+    34px 34px 60px color-mix(in oklch, var(--ink) 5%, transparent);
+  transform: rotate(-4deg);
+}
+
 a {
   color: inherit;
   font-weight: 650;
@@ -77,7 +102,12 @@ a:focus-visible,
   margin: 0;
   padding: 0 var(--page-pad);
   overflow: clip;
-  background: var(--surface);
+  background: color-mix(in oklch, var(--surface) 84%, transparent);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in oklch, var(--ink) 10%, transparent),
+    0 0 90px color-mix(in oklch, var(--ink) 6%, transparent);
 }
 
 .hero {
@@ -97,7 +127,8 @@ a:focus-visible,
   top: clamp(110px, 16vw, 190px);
   left: -0.05em;
   z-index: -2;
-  color: var(--wash);
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in oklch, var(--ink) 12%, transparent);
   font-family: var(--font-sans);
   font-size: clamp(5.2rem, 17vw, 11.5rem);
   font-weight: 900;
@@ -113,7 +144,9 @@ a:focus-visible,
   z-index: -1;
   width: clamp(150px, 28vw, 310px);
   height: 65%;
-  background: var(--wash);
+  border-left: 4px solid color-mix(in oklch, var(--ink) 16%, transparent);
+  border-right: 4px solid color-mix(in oklch, var(--ink) 16%, transparent);
+  background: transparent;
 }
 
 .hero-index {
@@ -292,7 +325,8 @@ section::before {
   z-index: -1;
   max-width: 100%;
   overflow: hidden;
-  color: color-mix(in oklch, var(--wash) 75%, transparent);
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in oklch, var(--ink) 10%, transparent);
   font-family: var(--font-sans);
   font-size: clamp(3.4rem, 11vw, 8.5rem);
   font-weight: 900;
@@ -418,87 +452,42 @@ p:last-child {
 .card {
   min-height: 150px;
   padding: 20px 0 28px clamp(18px, 3vw, 32px);
-  border-top: 3px solid var(--line);
-  transition: background-color 180ms cubic-bezier(0.22, 1, 0.36, 1), transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  border-top: 4px solid var(--ink);
+  background: transparent;
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card::before {
-  content: "";
-  position: absolute;
-  top: -3px;
-  left: 0;
-  z-index: 2;
-  width: 10px;
-  height: 10px;
-  background: var(--ink);
+  display: none;
 }
 
 .card:hover {
-  background: color-mix(in oklch, var(--wash) 28%, transparent);
   transform: translateX(6px);
 }
 
-#focus .card::after,
-#startups .card::after,
-#workflow .card::after,
-.card[class*="card--accent-"]::after {
-  content: "";
-  position: absolute;
-  top: -3px;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 3px;
+#focus .card {
+  border-top-color: #db2777;
 }
 
-#focus .card::after {
-  background: transparent;
+#startups .card {
+  border-top-color: #ea580c;
 }
 
-#startups .card::after {
-  background: transparent;
+#workflow .card {
+  border-top-color: #16a34a;
 }
 
-#workflow .card::after {
-  background: transparent;
-}
-
-.card--accent-blue::after,
-.card--accent-indigo::after,
-.card--accent-red::after,
-.card--accent-orange::after,
-.card--accent-green::after,
-.card--accent-amber::after,
-.card--accent-pink::after,
-.card--accent-purple::after,
-.card--accent-teal::after,
-.card--accent-crimson::after {
-  background: transparent;
-}
-
-#focus .card::before {
-  background: #db2777;
-}
-
-#startups .card::before {
-  background: #ea580c;
-}
-
-#workflow .card::before {
-  background: #16a34a;
-}
-
-.card--accent-blue::before,
-.card--accent-indigo::before,
-.card--accent-red::before,
-.card--accent-orange::before,
-.card--accent-green::before,
-.card--accent-amber::before,
-.card--accent-pink::before,
-.card--accent-purple::before,
-.card--accent-teal::before,
-.card--accent-crimson::before {
-  background: #db2777;
+.card--accent-blue,
+.card--accent-indigo,
+.card--accent-red,
+.card--accent-orange,
+.card--accent-green,
+.card--accent-amber,
+.card--accent-pink,
+.card--accent-purple,
+.card--accent-teal,
+.card--accent-crimson {
+  border-top-color: #db2777;
 }
 
 .card--featured,
