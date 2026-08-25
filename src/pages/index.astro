@@ -5,6 +5,8 @@ import BookCard from '../components/BookCard.astro';
 
 const title = '李潇然 | 项目、笔记和判断';
 const description = '会用 AI 工具，热爱探索科技产品，习惯在不舒服的场景里学习适应的人。';
+const siteUrl = 'https://lixiaoran-personal-site.pages.dev';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 ---
 
 <html lang="zh-CN">
@@ -14,6 +16,15 @@ const description = '会用 AI 工具，热爱探索科技产品，习惯在不�
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <title>{title}</title>
   </head>
   <body>
@@ -88,7 +99,7 @@ const description = '会用 AI 工具，热爱探索科技产品，习惯在不�
         <h2 class="section-title">我在做什么</h2>
         <div class="card-grid">
           <Card title={`明论资本 · <span class="hand-circle">FA 实习生</span>`} label="实习">
-            <p>跟 GP 做前端 deal sourcing。用 X-mapper / AI-mapper-agentic 发现 AI 项目和人才线索，用 Exa 给 Agent 提供搜索输入，用 Context Mode 优化上下文处理，把"值得 reach"的判断沉淀成可复用规则。</p>
+            <p>跟 GP 做前端 deal sourcing。用 X Mapper / AI Mapper Agent 发现 AI 项目和人才线索，用 Exa 给 Agent 提供搜索输入，用 Context Mode 优化上下文处理，把"值得 reach"的判断沉淀成可复用规则。</p>
             <p>这是第一份实习，核心目标是走出舒适区：从学生作业模式切换到"交付真实业务结果"模式。</p>
           </Card>
 
@@ -177,7 +188,7 @@ const description = '会用 AI 工具，热爱探索科技产品，习惯在不�
           </Card>
 
           <Card title={`<span class="hand-circle">AI 工具配置</span>`}>
-            <p>Cloud Code + CCS（配置模型 API 的插件），连接 KIMI、GPT 等基座模型。搜索用 Exa，上下文管理用 Context Mode，知识库在 Notion。自己写了 Xmapper、<span class="hand-circle">AI Mapper Agentic</span>（触达初创团队和早期项目）、Finance Expert Team 等 skills。</p>
+            <p>Claude Code + CCS（配置模型 API 的插件），连接 KIMI、GPT 等基座模型。搜索用 Exa，上下文管理用 Context Mode，知识库在 Notion。自己写了 X Mapper、<span class="hand-circle">AI Mapper Agent</span>（触达初创团队和早期项目）、Finance Expert Team 等 skills。</p>
             <img src="/images/idea-demo-final.png" alt="从想法到最终产物的 AI 工作流" class="workflow-image" />
           </Card>
         </div>
@@ -340,11 +351,11 @@ const description = '会用 AI 工具，热爱探索科技产品，习惯在不�
           <Card label="2026-03-15">
             <p>公司可能会从文件系统走向 <span class="hand-circle">agent 系统</span>。</p>
           </Card>
-          <Card label="2026-03-03">
-            <p>最有价值的资产可能是 <span class="hand-circle">md 文件</span>。</p>
-          </Card>
           <Card label="2026-03-18">
             <p>AI 落地的难点<span class="hand-circle">不只在模型</span>。</p>
+          </Card>
+          <Card label="2026-03-03">
+            <p>最有价值的资产可能是 <span class="hand-circle">md 文件</span>。</p>
           </Card>
         </div>
 
@@ -403,7 +414,13 @@ const description = '会用 AI 工具，热爱探索科技产品，习惯在不�
         <Card>
           <p>如果你在构建 AI 工具、研究公司、或想聊聊最近读的书，可以发邮件或加我微信。</p>
           <a href="mailto:sephirxxxz@gmail.com" class="contact-email hand-circle">sephirxxxz@gmail.com</a>
-          <p style="margin-top: 12px; color: var(--text-secondary);">微信：19816894652</p>
+          <p class="contact-wechat">微信：19816894652</p>
+          <div class="contact-links" aria-label="项目与账号">
+            <a href="https://github.com/sephirxxxz" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://github.com/sephirxxxz/finance-expert-team" target="_blank" rel="noopener noreferrer">Finance Expert Team</a>
+            <a href="https://github.com/sephirxxxz/ai-mapper-agent" target="_blank" rel="noopener noreferrer">AI Mapper Agent</a>
+            <a href="https://github.com/sephirxxxz/x-mapper-skill" target="_blank" rel="noopener noreferrer">X Mapper</a>
+          </div>
         </Card>
       </section>
     </main>

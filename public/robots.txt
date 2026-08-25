@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lixiaoran-personal-site.pages.dev/sitemap.xml
