@@ -33,6 +33,7 @@ for (const [name, pattern] of sourceContracts) {
 
 assert.doesNotMatch(index, /Cloud Code/, 'stale “Cloud Code” wording remains');
 assert.doesNotMatch(index, /var\(--text-secondary\)/, 'undefined contact color token remains');
+assert.doesNotMatch(index, /第一份实习直接进了FA 交易现场/, 'FA internship sentence should be removed');
 assert.doesNotMatch(index, /hand-circle/, 'hand-drawn circle markup remains');
 assert.doesNotMatch(styles, /hand-circle/, 'hand-drawn circle styling remains');
 assert.doesNotMatch(styles, /#db2777|#ea580c|#16a34a|#2563eb/, 'legacy accent colors remain');
