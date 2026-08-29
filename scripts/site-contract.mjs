@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const index = fs.readFileSync(path.join(root, 'src/pages/index.astro'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'src/styles/global.css'), 'utf8');
+const relationshipBooks = fs.readFileSync(path.join(root, 'src/data/relationship-books.ts'), 'utf8');
 const source = `${index}\n${styles}`;
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 
@@ -20,6 +21,8 @@ const sourceContracts = [
   ['relationship progress link', /href="#relationship-books"/],
   ['internship progress link', /href="#internship"/],
   ['public internship advice', /实习工作系统/],
+  ['white site background', /--paper:\s*#fff;/],
+  ['red-gold palette', /--accent-red:[\s\S]*--accent-gold:/],
   ['correct Claude Code spelling', /Claude Code/],
   ['muted contact color token', /color: var\(--muted\)/],
 ];
@@ -30,6 +33,11 @@ for (const [name, pattern] of sourceContracts) {
 
 assert.doesNotMatch(index, /Cloud Code/, 'stale “Cloud Code” wording remains');
 assert.doesNotMatch(index, /var\(--text-secondary\)/, 'undefined contact color token remains');
+assert.doesNotMatch(index, /hand-circle/, 'hand-drawn circle markup remains');
+assert.doesNotMatch(styles, /hand-circle/, 'hand-drawn circle styling remains');
+assert.doesNotMatch(styles, /#db2777|#ea580c|#16a34a|#2563eb/, 'legacy accent colors remain');
+assert.match(relationshipBooks, /cover:\s*['\"][^'\"]+['\"]/,'relationship book cover metadata is missing');
+assert.equal((relationshipBooks.match(/cover:\s*['\"]/g) ?? []).length, 10, 'every relationship book needs a cover');
 assert.match(styles, /\.tag\s*\{[\s\S]*white-space:\s*nowrap;/, 'mobile tag wrapping contract is missing');
 assert.match(styles, /\.hero-intro\s*\{[\s\S]*min-width:\s*0;/, 'mobile hero grid min-width contract is missing');
 assert.equal(packageJson.scripts['test:site'], 'node scripts/site-contract.mjs');

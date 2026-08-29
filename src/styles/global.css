@@ -1,13 +1,17 @@
 :root {
-  --paper: oklch(91.8% 0.014 85);
-  --surface: oklch(95.2% 0.011 85);
-  --ink: oklch(16% 0 0);
-  --ink-soft: oklch(35% 0.008 250);
-  --muted: oklch(52% 0.008 250);
-  --line: oklch(78% 0.006 250);
-  --wash: oklch(87% 0.014 250);
-  --wash-strong: oklch(79% 0.025 250);
-  --focus: oklch(44% 0.11 255);
+  --paper: #fff;
+  --surface: #fff;
+  --ink: #171717;
+  --ink-soft: #3f3f46;
+  --muted: #71717a;
+  --line: #d4d4d8;
+  --wash: #f4f4f5;
+  --wash-strong: #e4e4e7;
+  --focus: #8f1d2c;
+  --accent-red: #b32631;
+  --accent-red-deep: #7f1d1d;
+  --accent-gold: #c7921e;
+  --accent-gold-soft: #f3e7bf;
   --font-sans: "Arial Narrow", "Aptos Narrow", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-body: "Aptos", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
@@ -305,31 +309,6 @@ h1 {
   text-transform: uppercase;
 }
 
-.filters {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
-.hand-circle {
-  position: relative;
-  display: inline-block;
-  z-index: 1;
-}
-
-.hand-circle::after {
-  content: "";
-  position: absolute;
-  inset: -0.22em -0.42em;
-  border: 2.5px solid var(--ink);
-  border-radius: 50%;
-  filter: url(#hand-circle);
-  opacity: 0.9;
-  pointer-events: none;
-  transform: rotate(-2deg);
-}
-
 .hero-tags {
   display: flex;
   flex-wrap: wrap;
@@ -395,34 +374,34 @@ h2 {
   margin-bottom: clamp(28px, 5vw, 52px);
   padding: 0 14px 8px 0;
   border-bottom: 5px solid var(--ink);
-  color: color-mix(in oklch, var(--surface) 91%, var(--ink));
+  color: var(--ink);
   text-shadow:
-    -1px -1px 0 color-mix(in oklch, white 82%, transparent),
-    1px 1px 1px color-mix(in oklch, var(--ink) 24%, transparent),
-    2px 2px 3px color-mix(in oklch, var(--ink) 8%, transparent);
+    1px 1px 1px color-mix(in srgb, var(--ink) 18%, transparent),
+    2px 2px 3px color-mix(in srgb, var(--ink) 7%, transparent);
   font-size: clamp(2.2rem, 5vw, 3.8rem);
   letter-spacing: -0.025em;
 }
 
 #focus h2 {
-  border-bottom-color: #db2777;
+  border-bottom-color: var(--accent-red);
 }
 
 #startups h2 {
-  border-bottom-color: #ea580c;
+  border-bottom-color: var(--accent-gold);
 }
 
 #workflow h2 {
-  border-bottom-color: #16a34a;
+  border-bottom-color: var(--accent-red);
 }
 
 #internship h2 {
-  border-bottom-color: #2563eb;
+  border-bottom-color: var(--accent-gold);
 }
 
 #focus h2::after,
 #startups h2::after,
-#workflow h2::after {
+#workflow h2::after,
+#internship h2::after {
   content: "";
   position: absolute;
   right: 0;
@@ -432,15 +411,19 @@ h2 {
 }
 
 #focus h2::after {
-  background: color-mix(in srgb, #db2777 70%, #000);
+  background: var(--accent-red-deep);
 }
 
 #startups h2::after {
-  background: color-mix(in srgb, #ea580c 70%, #000);
+  background: var(--accent-gold);
 }
 
 #workflow h2::after {
-  background: color-mix(in srgb, #16a34a 70%, #000);
+  background: var(--accent-red-deep);
+}
+
+#internship h2::after {
+  background: var(--accent-gold);
 }
 
 #doing h2,
@@ -516,32 +499,35 @@ p:last-child {
 }
 
 #focus .card {
-  border-top-color: #db2777;
+  border-top-color: var(--accent-red);
 }
 
 #startups .card {
-  border-top-color: #ea580c;
+  border-top-color: var(--accent-gold);
 }
 
 #workflow .card {
-  border-top-color: #16a34a;
+  border-top-color: var(--accent-red);
 }
 
 #internship .card {
-  border-top-color: #2563eb;
+  border-top-color: var(--accent-gold);
 }
 
 .card--accent-blue,
 .card--accent-indigo,
 .card--accent-red,
-.card--accent-orange,
 .card--accent-green,
-.card--accent-amber,
 .card--accent-pink,
 .card--accent-purple,
 .card--accent-teal,
 .card--accent-crimson {
-  border-top-color: #db2777;
+  border-top-color: var(--accent-red);
+}
+
+.card--accent-orange,
+.card--accent-amber {
+  border-top-color: var(--accent-gold);
 }
 
 .card--featured,
@@ -602,15 +588,15 @@ p:last-child {
 }
 
 #focus .section-subtitle {
-  background: linear-gradient(to right, rgba(219, 39, 119, 0.18) 0 72%, transparent 72%);
+  background: linear-gradient(to right, color-mix(in srgb, var(--accent-red) 16%, transparent) 0 72%, transparent 72%);
 }
 
 #startups .section-subtitle {
-  background: linear-gradient(to right, rgba(234, 88, 12, 0.18) 0 72%, transparent 72%);
+  background: linear-gradient(to right, color-mix(in srgb, var(--accent-gold) 18%, transparent) 0 72%, transparent 72%);
 }
 
 #workflow .section-subtitle {
-  background: linear-gradient(to right, rgba(22, 163, 74, 0.18) 0 72%, transparent 72%);
+  background: linear-gradient(to right, color-mix(in srgb, var(--accent-red) 16%, transparent) 0 72%, transparent 72%);
 }
 
 .article-subtitle {
@@ -801,16 +787,12 @@ p:last-child {
   transform: scaleX(2.6);
 }
 
-.section-progress a.progress-blue.active {
-  background: #db2777;
+.section-progress a.progress-red.active {
+  background: var(--accent-red);
 }
 
-.section-progress a.progress-orange.active {
-  background: #ea580c;
-}
-
-.section-progress a.progress-green.active {
-  background: #16a34a;
+.section-progress a.progress-gold.active {
+  background: var(--accent-gold);
 }
 
 @media (max-width: 900px) {

@@ -29,12 +29,6 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
     <title>{title}</title>
   </head>
   <body>
-    <svg class="filters" aria-hidden="true" width="0" height="0">
-      <filter id="hand-circle" x="-20%" y="-20%" width="140%" height="140%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </svg>
     <a class="skip-link" href="#main-content">跳到主要内容</a>
     <div class="site-bg" aria-hidden="true">
       <span class="site-bg__text">SCPHRLX</span>
@@ -43,9 +37,9 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       <a href="#hero" data-section="hero" aria-label="顶部"></a>
       <a href="#about" data-section="about" aria-label="我是谁"></a>
       <a href="#doing" data-section="doing" aria-label="我在做什么"></a>
-      <a href="#focus" data-section="focus" class="progress-blue" aria-label="我相信什么"></a>
-      <a href="#startups" data-section="startups" class="progress-orange" aria-label="我觉得有意思的 AI 产品"></a>
-      <a href="#workflow" data-section="workflow" class="progress-green" aria-label="工作流"></a>
+      <a href="#focus" data-section="focus" class="progress-red" aria-label="我相信什么"></a>
+      <a href="#startups" data-section="startups" class="progress-gold" aria-label="我觉得有意思的 AI 产品"></a>
+      <a href="#workflow" data-section="workflow" class="progress-red" aria-label="工作流"></a>
       <a href="#featured-books" data-section="featured-books" aria-label="年度推荐"></a>
       <a href="#more-books" data-section="more-books" aria-label="其他在读"></a>
       <a href="#relationship-books" data-section="relationship-books" aria-label="关系与组织书单"></a>
@@ -74,7 +68,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
           </div>
           <div class="hero-intro">
             <p class="subtitle">会用 AI 工具，热爱探索科技产品，习惯在不舒服的场景里学习适应的人。</p>
-            <p class="hero-motto hand-circle" aria-label="个人信条">INTENSE, DOGGED, AND FUN.</p>
+            <p class="hero-motto" aria-label="个人信条">INTENSE, DOGGED, AND FUN.</p>
             <div class="hero-tags" aria-label="能力关键词">
               <span class="tag">AI Native</span>
               <span class="tag">Method Sort</span>
@@ -92,8 +86,8 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       <section id="about" data-word="ABOUT ME">
         <h2>我是谁</h2>
         <Card>
-          <p>大二学生，第一份实习直接进了<span class="hand-circle">FA 交易现场</span>。</p>
-          <p>关注 AI 软件、公司研究、<span class="hand-circle">投资判断</span>和 tools for thought。相信好的工作来自"<span class="hand-circle">少而深</span>"的判断，而不是堆材料。</p>
+          <p>大二学生，第一份实习直接进了FA 交易现场。</p>
+          <p>关注 AI 软件、公司研究、投资判断和 tools for thought。相信好的工作来自"少而深"的判断，而不是堆材料。</p>
         </Card>
       </section>
 
@@ -101,24 +95,24 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       <section id="doing" data-word="EXPERIENCE">
         <h2 class="section-title">我在做什么</h2>
         <div class="card-grid">
-          <Card title={`明论资本 · <span class="hand-circle">FA 实习生</span>`} label="实习">
+          <Card title={`明论资本 · FA 实习生`} label="实习">
             <p>跟 GP 做前端 deal sourcing。用 X Mapper / AI Mapper Agent 发现 AI 项目和人才线索，用 Exa 给 Agent 提供搜索输入，用 Context Mode 优化上下文处理，把"值得 reach"的判断沉淀成可复用规则。</p>
             <p>这是第一份实习，核心目标是走出舒适区：从学生作业模式切换到"交付真实业务结果"模式。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">Finance Expert Team</span>`} label="项目">
-            <p>多 agent 投资研究检查清单，覆盖基本面、技术面、新闻情绪、风险、组合视角和报告输出。目标是<span class="hand-circle">减少确认偏误</span>，让分数背后的假设、证据质量和分歧可被审查。</p>
+          <Card title={`Finance Expert Team`} label="项目">
+            <p>多 agent 投资研究检查清单，覆盖基本面、技术面、新闻情绪、风险、组合视角和报告输出。目标是减少确认偏误，让分数背后的假设、证据质量和分歧可被审查。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">GeWu inquiro</span>`} label="项目">
-            <p>记忆与主动学习工具。导入材料、提取知识节点、构建下一步学习路径、恢复上下文。真正中断的不是资料，而是<span class="hand-circle">学习的上下文</span>。</p>
+          <Card title={`GeWu inquiro`} label="项目">
+            <p>记忆与主动学习工具。导入材料、提取知识节点、构建下一步学习路径、恢复上下文。真正中断的不是资料，而是学习的上下文。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">Pet Travel App</span>`} label="项目">
-            <p>学校资助的创业项目，最终失败。需求看起来清晰，但供应、履约和线下运营太重。学到的核心一课：<span class="hand-circle">有需求不等于有商业模式</span>。</p>
+          <Card title={`Pet Travel App`} label="项目">
+            <p>学校资助的创业项目，最终失败。需求看起来清晰，但供应、履约和线下运营太重。学到的核心一课：有需求不等于有商业模式。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">US Stock Investing</span>`} label="项目">
+          <Card title={`US Stock Investing`} label="项目">
             <p>用真金白银测试对 AI 基础设施、财报、竞争、估值和叙事的判断，包括 NVIDIA 研究。写判断和真正买入不是一回事。</p>
           </Card>
         </div>
@@ -128,17 +122,17 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       <section id="focus" data-word="BELIEFS">
         <h2 class="section-title">我相信什么</h2>
         <div class="card-grid">
-          <Card title={`<span class="hand-circle">AI 的工作流压缩</span>`}>
-            <p>哪些复杂工作会被 AI 压缩成"一句话一个结果"？我在找那些工作流程会被<span class="hand-circle">重新定义</span>的赛道。</p>
+          <Card title={`AI 的工作流压缩`}>
+            <p>哪些复杂工作会被 AI 压缩成"一句话一个结果"？我在找那些工作流程会被重新定义的赛道。</p>
           </Card>
-          <Card title={`<span class="hand-circle">founder 的稀缺性</span>`}>
-            <p>想法不值钱，能把想法<span class="hand-circle">变成垄断</span>的人稀缺。我看 founder 看的是学习速度、对痛苦的耐受度和对权力的清醒。</p>
+          <Card title={`founder 的稀缺性`}>
+            <p>想法不值钱，能把想法变成垄断的人稀缺。我看 founder 看的是学习速度、对痛苦的耐受度和对权力的清醒。</p>
           </Card>
-          <Card title={`<span class="hand-circle">垄断的来源</span>`}>
-            <p>技术是借口，<span class="hand-circle">垄断才是结果</span>。网络效应、规模效应、品牌、10x 技术，到底哪一种在这个项目里成立？</p>
+          <Card title={`垄断的来源`}>
+            <p>技术是借口，垄断才是结果。网络效应、规模效应、品牌、10x 技术，到底哪一种在这个项目里成立？</p>
           </Card>
-          <Card title={`<span class="hand-circle">判断的复用</span>`}>
-            <p>怎么把一次判断变成下一次的输入？我在搭一套<span class="hand-circle">可记录、可验证、可迭代</span>的判断系统。</p>
+          <Card title={`判断的复用`}>
+            <p>怎么把一次判断变成下一次的输入？我在搭一套可记录、可验证、可迭代的判断系统。</p>
           </Card>
         </div>
       </section>
@@ -147,28 +141,28 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       <section id="startups" data-word="STARTUPS">
         <h2 class="section-title">我觉得有意思的 AI 产品</h2>
         <div class="card-grid">
-          <Card title={`<span class="hand-circle">Perplexity</span>`}>
-            <p>它的 onboarding 很短，却让我立刻理解了这个产品该怎么用。这种"<span class="hand-circle">先教你用，再给你功能</span>"的设计，比堆特性更难做。</p>
+          <Card title={`Perplexity`}>
+            <p>它的 onboarding 很短，却让我立刻理解了这个产品该怎么用。这种"先教你用，再给你功能"的设计，比堆特性更难做。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">Replit</span>`}>
-            <p>它在验证一个极端假设：<span class="hand-circle">公司能不能自己编程</span>。loop engineering 让 agent 不只是生成代码，还能执行、看到反馈、再迭代。</p>
+          <Card title={`Replit`}>
+            <p>它在验证一个极端假设：公司能不能自己编程。loop engineering 让 agent 不只是生成代码，还能执行、看到反馈、再迭代。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">Linear</span>`}>
-            <p>它把项目管理做成了团队决策的镜子。优先级、负责人、阻塞点，全都被迫变得<span class="hand-circle">清晰可见</span>。</p>
+          <Card title={`Linear`}>
+            <p>它把项目管理做成了团队决策的镜子。优先级、负责人、阻塞点，全都被迫变得清晰可见。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">1X Technologies</span>`}>
-            <p>它押注得很早：世界模型 + VLA 让机器人理解环境，灵巧手让它真正执行任务。通用机器人需要这两者<span class="hand-circle">同时成立</span>。</p>
+          <Card title={`1X Technologies`}>
+            <p>它押注得很早：世界模型 + VLA 让机器人理解环境，灵巧手让它真正执行任务。通用机器人需要这两者同时成立。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">Pool</span>`}>
-            <p>今年最有审美的 AI 软件之一。它把截图从临时存档变成<span class="hand-circle">可搜索、可整理、可分享</span>的内容流，让我重新理解"个人信息管理"可以怎么做。</p>
+          <Card title={`Pool`}>
+            <p>今年最有审美的 AI 软件之一。它把截图从临时存档变成可搜索、可整理、可分享的内容流，让我重新理解"个人信息管理"可以怎么做。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">HeyClicky</span>`}>
-            <p>它不一样的地方在于，AI 对话的上下文不只是你输入了什么，而是你正在看什么。它实时感知屏幕，所以不用反复解释背景，交互从问答变成<span class="hand-circle">陪伴式的协助</span>。</p>
+          <Card title={`HeyClicky`}>
+            <p>它不一样的地方在于，AI 对话的上下文不只是你输入了什么，而是你正在看什么。它实时感知屏幕，所以不用反复解释背景，交互从问答变成陪伴式的协助。</p>
           </Card>
         </div>
       </section>
@@ -177,21 +171,21 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       <section id="workflow" data-word="WORKFLOW">
         <h2 class="section-title">工作流</h2>
         <div class="card-grid">
-          <Card title={`<span class="hand-circle">信息流</span>`}>
+          <Card title={`信息流`}>
             <p>少即是多。一天只看几篇高质量文章和行业研报，不刷大量自媒体。剩下的时间留给经典的书。</p>
-            <p><span class="hand-circle">信息摄入的质量决定判断质量</span>，数量不决定。</p>
+            <p>信息摄入的质量决定判断质量，数量不决定。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">Nowledge Mem</span>`}>
-            <p>它给 AI 工具和 Agent 做了一个本地优先的记忆层，自动收集对话、文档和上下文。Agent 长期工作，<span class="hand-circle">不能每次都从零开始</span>。</p>
+          <Card title={`Nowledge Mem`}>
+            <p>它给 AI 工具和 Agent 做了一个本地优先的记忆层，自动收集对话、文档和上下文。Agent 长期工作，不能每次都从零开始。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">gbrain</span>`}>
-            <p>Garry Tan 开源的 Agent 记忆系统，把 Markdown 笔记自动组织成自连接的知识图谱。它的核心想法是：Agent 的<span class="hand-circle">长期记忆</span>不应该依赖每次的上下文窗口，而应该是一个可以持续读写的结构化大脑。</p>
+          <Card title={`gbrain`}>
+            <p>Garry Tan 开源的 Agent 记忆系统，把 Markdown 笔记自动组织成自连接的知识图谱。它的核心想法是：Agent 的长期记忆不应该依赖每次的上下文窗口，而应该是一个可以持续读写的结构化大脑。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">AI 工具配置</span>`}>
-            <p>Claude Code + CCS（配置模型 API 的插件），连接 KIMI、GPT 等基座模型。搜索用 Exa，上下文管理用 Context Mode，知识库在 Notion。自己写了 X Mapper、<span class="hand-circle">AI Mapper Agent</span>（触达初创团队和早期项目）、Finance Expert Team 等 skills。</p>
+          <Card title={`AI 工具配置`}>
+            <p>Claude Code + CCS（配置模型 API 的插件），连接 KIMI、GPT 等基座模型。搜索用 Exa，上下文管理用 Context Mode，知识库在 Notion。自己写了 X Mapper、AI Mapper Agent（触达初创团队和早期项目）、Finance Expert Team 等 skills。</p>
             <img src="/images/idea-demo-final.png" alt="从想法到最终产物的 AI 工作流" class="workflow-image" />
           </Card>
         </div>
@@ -203,30 +197,30 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
         <div class="book-scroll">
           <BookCard
             cover="/covers/zero-to-one.jpg"
-            title={`<span class="hand-circle">Zero to One</span>`}
+            title={`Zero to One`}
             author="Peter Thiel"
-            note={`真正从 0 到 1 的创业不是找到一个 idea，而是找到一个别人还没看到的 <span class="hand-circle">secret</span>，并用一个可闭环的结构把它变成垄断。这让我看项目时先问'这件事的商业逻辑能不能自己闭环'，再问'它能做多大'。`}
+            note={`真正从 0 到 1 的创业不是找到一个 idea，而是找到一个别人还没看到的 secret，并用一个可闭环的结构把它变成垄断。这让我看项目时先问'这件事的商业逻辑能不能自己闭环'，再问'它能做多大'。`}
           />
 
           <BookCard
             cover="/covers/hard-thing.jpg"
-            title={`<span class="hand-circle">The Hard Thing About Hard Things</span>`}
+            title={`The Hard Thing About Hard Things`}
             author="Ben Horowitz"
-            note={`创业没有公式，CEO 最难的是管理自己的心理，并在绝境中做那些<span class="hand-circle">没人愿意做的决定</span>。评估创始人不能只看增长曲线，而要看他在低谷中的行动质量。`}
+            note={`创业没有公式，CEO 最难的是管理自己的心理，并在绝境中做那些没人愿意做的决定。评估创始人不能只看增长曲线，而要看他在低谷中的行动质量。`}
           />
 
           <BookCard
             cover="/covers/founder-dilemmas.jpg"
-            title={`<span class="hand-circle">The Founder's Dilemmas</span>`}
+            title={`The Founder's Dilemmas`}
             author="Noam Wasserman"
-            note={`每个创始人都在 <span class="hand-circle">Rich（财富最大化）和 King（控制权）</span>之间做选择，早期每一个决定都会锁定后续路径。看 cap table 和条款时，先问'这个 founder 到底想要什么'。`}
+            note={`每个创始人都在 Rich（财富最大化）和 King（控制权）之间做选择，早期每一个决定都会锁定后续路径。看 cap table 和条款时，先问'这个 founder 到底想要什么'。`}
           />
 
           <BookCard
             cover="/covers/beginning-of-infinity.jpg"
-            title={`<span class="hand-circle">The Beginning of Infinity</span>`}
+            title={`The Beginning of Infinity`}
             author="David Deutsch"
-            note={`知识的增长来自<span class="hand-circle">更好的解释</span>，而不是更多数据。判断一家公司，我会看它是否提供了当前最好的解释；如果出现更好的解释，我也愿意更新判断。确定性不是起点，是不断被反驳和修正后接近的结果。`}
+            note={`知识的增长来自更好的解释，而不是更多数据。判断一家公司，我会看它是否提供了当前最好的解释；如果出现更好的解释，我也愿意更新判断。确定性不是起点，是不断被反驳和修正后接近的结果。`}
           />
         </div>
       </section>
@@ -237,51 +231,51 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
         <div class="book-scroll">
           <BookCard
             cover="/covers/power-law.jpg"
-            title={`<span class="hand-circle">The Power Law</span>`}
+            title={`The Power Law`}
             author="Sebastian Mallaby"
-            note={`VC 行业的本质是幂律，一个基金的成败往往只由 <span class="hand-circle">1–2 笔投资</span>决定。理解了为什么 VC 不接'好公司'，只接'可能成为唯一赢家'的公司。`}
+            note={`VC 行业的本质是幂律，一个基金的成败往往只由 1–2 笔投资决定。理解了为什么 VC 不接'好公司'，只接'可能成为唯一赢家'的公司。`}
           />
 
           <BookCard
             cover="/covers/mom-test.jpg"
-            title={`<span class="hand-circle">The Mom Test</span>`}
+            title={`The Mom Test`}
             author="Rob Fitzpatrick"
-            note={`找用户聊天时，所有人都会骗你。这本书教我怎么问出<span class="hand-circle">真实需求</span>：不问'你会不会买'，而问'你上次遇到这个问题时是怎么做的'。`}
+            note={`找用户聊天时，所有人都会骗你。这本书教我怎么问出真实需求：不问'你会不会买'，而问'你上次遇到这个问题时是怎么做的'。`}
           />
 
           <BookCard
             cover="/covers/7-powers.jpg"
-            title={`<span class="hand-circle">7 Powers</span>`}
+            title={`7 Powers`}
             author="Hamilton Helmer"
-            note={`商业战略的底层框架：规模经济、网络效应、品牌、垄断资源等<span class="hand-circle">七种力量</span>。看项目时，先问它未来能不能建立其中一种。`}
+            note={`商业战略的底层框架：规模经济、网络效应、品牌、垄断资源等七种力量。看项目时，先问它未来能不能建立其中一种。`}
           />
 
           <BookCard
             cover="/covers/innovator-dilemma.jpg"
-            title={`<span class="hand-circle">The Innovator's Dilemma</span>`}
+            title={`The Innovator's Dilemma`}
             author="Clayton M. Christensen"
-            note={`大公司失败不一定是因为缺少创新，而是因为它们太擅长服务<span class="hand-circle">当前最好的客户</span>。看 AI 项目时，我会问：它是不是正在用一套新技术，服务一个现有巨头暂时不愿意服务的市场。`}
+            note={`大公司失败不一定是因为缺少创新，而是因为它们太擅长服务当前最好的客户。看 AI 项目时，我会问：它是不是正在用一套新技术，服务一个现有巨头暂时不愿意服务的市场。`}
           />
 
           <BookCard
             cover="/covers/secrets-sand-hill.jpg"
-            title={`<span class="hand-circle">Secrets of Sand Hill Road</span>`}
+            title={`Secrets of Sand Hill Road`}
             author="Scott Kupor"
-            note={`VC 不是神秘行业，它的行为由 LP-GP 结构、基金存续期和 carry 机制决定。把 VC 的决策从'个人偏好'还原成'<span class="hand-circle">制度激励</span>'。`}
+            note={`VC 不是神秘行业，它的行为由 LP-GP 结构、基金存续期和 carry 机制决定。把 VC 的决策从'个人偏好'还原成'制度激励'。`}
           />
 
           <BookCard
             cover="/covers/paypal-wars.jpg"
-            title={`<span class="hand-circle">The PayPal Wars</span>`}
+            title={`The PayPal Wars`}
             author="Eric Jackson"
-            note={`PayPal 的成功不是源于完美战略，而是源于高压下的快速迭代和一群愿意打仗的人。更关注早期团队的<span class="hand-circle">战斗力和应变能力</span>，而不是 BP 上的计划。`}
+            note={`PayPal 的成功不是源于完美战略，而是源于高压下的快速迭代和一群愿意打仗的人。更关注早期团队的战斗力和应变能力，而不是 BP 上的计划。`}
           />
 
           <BookCard
             cover="/covers/venture-deals.jpg"
-            title={`<span class="hand-circle">Venture Deals</span>`}
+            title={`Venture Deals`}
             author="Brad Feld & Jason Mendelson"
-            note={`投资条款说到底只有两类：<span class="hand-circle">经济条款和控制条款</span>。拆条款时，先分清它影响的是回报还是权力。`}
+            note={`投资条款说到底只有两类：经济条款和控制条款。拆条款时，先分清它影响的是回报还是权力。`}
           />
         </div>
       </section>
@@ -300,20 +294,20 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
         <h2 class="section-title">实习工作系统</h2>
         <p class="section-lede">把实习笔记收敛成一套可迁移的方法：先降低沟通成本，再交付有用结果，最后让结果被正确看见。</p>
         <div class="card-grid">
-          <Card title={`<span class="hand-circle">接任务</span>`} label="01 · 对齐">
+          <Card title={`接任务`} label="01 · 对齐">
             <p>先确认任务最终支持什么判断、截止时间、交付形式、质量标准，以及时间不够时优先保哪一部分。</p>
           </Card>
-          <Card title={`<span class="hand-circle">推进</span>`} label="02 · 透明">
+          <Card title={`推进`} label="02 · 透明">
             <p>让进度可见。卡住 30–60 分钟就缩小问题、带着上下文和选项提问，不要等到截止前才暴露风险。</p>
           </Card>
-          <Card title={`<span class="hand-circle">交付</span>`} label="03 · 结论">
+          <Card title={`交付`} label="03 · 结论">
             <p>每次交付都给结论、证据、不确定性和下一步，而不是只丢一堆材料。把一次任务沉淀成团队可以复用的资产。</p>
           </Card>
-          <Card title={`<span class="hand-circle">关系</span>`} label="04 · 边界">
+          <Card title={`关系`} label="04 · 边界">
             <p>公开场合给面子，私下场合给事实；共享功劳，不传播未经确认的信息，也不把同事和导师当成情绪或资源工具。</p>
           </Card>
         </div>
-        <Card title={`<span class="hand-circle">每周复盘</span>`} label="05 · 复用" variant="featured" accent="blue">
+        <Card title={`每周复盘`} label="05 · 复用" variant="featured" accent="blue">
           <p>每周问自己：我交付了什么可以复用的东西？有没有提前暴露风险？导师是否需要追我？下周最重要的一件事是什么？</p>
           <p class="section-note">公开版只分享可迁移的工作方法，不包含雇主、客户、deal、内部数据或聊天记录。</p>
         </Card>
@@ -325,82 +319,82 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 
         <h3 class="section-subtitle">我读到的</h3>
         <div class="article-grid article-grid--featured">
-          <Card title={`<span class="hand-circle">Defining Taste</span>`} label="Mitchell Hashimoto" variant="featured" accent="purple">
-            <p>Taste 的本质是信息压缩能力。有人面对海量选项会纠结，有人能直接抓住对的那个。差距不在审美，在能不能快速判断<span class="hand-circle">什么是关键</span>。</p>
+          <Card title={`Defining Taste`} label="Mitchell Hashimoto" variant="featured" accent="purple">
+            <p>Taste 的本质是信息压缩能力。有人面对海量选项会纠结，有人能直接抓住对的那个。差距不在审美，在能不能快速判断什么是关键。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">Your AI's Memory</span>`} label="Matt Van Horn" variant="featured" accent="indigo">
+          <Card title={`Your AI's Memory`} label="Matt Van Horn" variant="featured" accent="indigo">
             <p>记忆和知识是两件事。记忆属于我，混杂、私人、依赖上下文；知识可以迁移、验证、反复使用。AI 真正该保存的，是后者。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">Math Mafia</span>`} label="Jesse Zhang" variant="featured" accent="red">
-            <p>奥赛背景的人成为创始人，优势不是聪明，而是在没有标准答案的环境里训练过。他们习惯长期没有正反馈，还能继续推进。这一代创始人的竞争密度更高，<span class="hand-circle">扛压能力</span>是新的稀缺资源。</p>
+          <Card title={`Math Mafia`} label="Jesse Zhang" variant="featured" accent="red">
+            <p>奥赛背景的人成为创始人，优势不是聪明，而是在没有标准答案的环境里训练过。他们习惯长期没有正反馈，还能继续推进。这一代创始人的竞争密度更高，扛压能力是新的稀缺资源。</p>
           </Card>
         </div>
 
         <h3 class="section-subtitle article-subtitle">我在X上面看到的优质文章</h3>
         <div class="article-grid article-grid--secondary">
-          <Card title={`<span class="hand-circle">The Self-Driving Company</span>`} label="Amjad Masad" variant="secondary" accent="blue">
-            <p>Agent 能跨系统调度之后，消失最快的是中层管理者。协调、传话、审批这些工作会被自动化，<span class="hand-circle">公司结构会变小</span>。</p>
+          <Card title={`The Self-Driving Company`} label="Amjad Masad" variant="secondary" accent="blue">
+            <p>Agent 能跨系统调度之后，消失最快的是中层管理者。协调、传话、审批这些工作会被自动化，公司结构会变小。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">On Grindslop</span>`} label="Will Manidis" variant="secondary" accent="orange">
-            <p>Grind culture 掩盖的是系统无能。真正的效率来自<span class="hand-circle">优先级清晰和流程可复用</span>，靠堆时间只会把自己变成人肉电池。</p>
+          <Card title={`On Grindslop`} label="Will Manidis" variant="secondary" accent="orange">
+            <p>Grind culture 掩盖的是系统无能。真正的效率来自优先级清晰和流程可复用，靠堆时间只会把自己变成人肉电池。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">human data market</span>`} label="Ali Ansari" variant="secondary" accent="green">
-            <p>真正值钱的数据，是人类在没被观察时的<span class="hand-circle">真实行为</span>。一旦被记录者意识到自己正在被记录，行为就会变形，数据的价值也跟着下降。</p>
+          <Card title={`human data market`} label="Ali Ansari" variant="secondary" accent="green">
+            <p>真正值钱的数据，是人类在没被观察时的真实行为。一旦被记录者意识到自己正在被记录，行为就会变形，数据的价值也跟着下降。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">AI's Biggest Winners</span>`} label="Daniel Kornum" variant="secondary" accent="blue">
-            <p>AI 不会只是帮助低利润率企业，它会接管它们。科技公司正在成为实体经济的<span class="hand-circle">事实操作系统层</span>。</p>
+          <Card title={`AI's Biggest Winners`} label="Daniel Kornum" variant="secondary" accent="blue">
+            <p>AI 不会只是帮助低利润率企业，它会接管它们。科技公司正在成为实体经济的事实操作系统层。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">America vs Shenzhen</span>`} label="Zane Hengsperger" variant="secondary" accent="amber">
-            <p>深圳的核心优势是<span class="hand-circle">失败成本低</span>。美国的监管、工会和供应链分散让这种成本结构很难复制，制造竞争力不只在工厂密度。</p>
+          <Card title={`America vs Shenzhen`} label="Zane Hengsperger" variant="secondary" accent="amber">
+            <p>深圳的核心优势是失败成本低。美国的监管、工会和供应链分散让这种成本结构很难复制，制造竞争力不只在工厂密度。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">The Most Human Technology</span>`} label="Anish Acharya" variant="secondary" accent="pink">
-            <p>当 AI 能生成一切完美内容时，人类亲手做出的笨拙感会变成稀缺品。不完美会变成一种<span class="hand-circle">身份象征</span>。</p>
+          <Card title={`The Most Human Technology`} label="Anish Acharya" variant="secondary" accent="pink">
+            <p>当 AI 能生成一切完美内容时，人类亲手做出的笨拙感会变成稀缺品。不完美会变成一种身份象征。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">World-Building Doors</span>`} label="Josh Elman" variant="secondary" accent="teal">
-            <p>技术的大门已经打开，但大多数人还在用旧地图找新大陆。真正的机会属于重新定义"<span class="hand-circle">一个人 + AI 能做什么</span>"的人。</p>
+          <Card title={`World-Building Doors`} label="Josh Elman" variant="secondary" accent="teal">
+            <p>技术的大门已经打开，但大多数人还在用旧地图找新大陆。真正的机会属于重新定义"一个人 + AI 能做什么"的人。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">New Media, One Year In</span>`} label="Erik Torenberg" variant="secondary" accent="crimson">
-            <p>有些媒体本质上是被投公司的武器化叙事基础设施。VC 不仅要投钱，还要帮你<span class="hand-circle">制造共识、占领注意力</span>。</p>
+          <Card title={`New Media, One Year In`} label="Erik Torenberg" variant="secondary" accent="crimson">
+            <p>有些媒体本质上是被投公司的武器化叙事基础设施。VC 不仅要投钱，还要帮你制造共识、占领注意力。</p>
           </Card>
         </div>
 
         <h3 class="section-subtitle">短判断</h3>
         <div class="card-grid">
           <Card label="2026-05-01">
-            <p>AI 软件还在早期阶段，<span class="hand-circle">先活下来</span>。</p>
+            <p>AI 软件还在早期阶段，先活下来。</p>
           </Card>
           <Card label="2026-04-11">
-            <p>先问哪个<span class="hand-circle">关键约束</span>会被解除。</p>
+            <p>先问哪个关键约束会被解除。</p>
           </Card>
           <Card label="2026-03-26">
-            <p>Context 可能<span class="hand-circle">不是长期护城河</span>。</p>
+            <p>Context 可能不是长期护城河。</p>
           </Card>
           <Card label="2026-03-15">
-            <p>公司可能会从文件系统走向 <span class="hand-circle">agent 系统</span>。</p>
+            <p>公司可能会从文件系统走向 agent 系统。</p>
           </Card>
           <Card label="2026-03-18">
-            <p>AI 落地的难点<span class="hand-circle">不只在模型</span>。</p>
+            <p>AI 落地的难点不只在模型。</p>
           </Card>
           <Card label="2026-03-03">
-            <p>最有价值的资产可能是 <span class="hand-circle">md 文件</span>。</p>
+            <p>最有价值的资产可能是 md 文件。</p>
           </Card>
         </div>
 
         <h3 class="section-subtitle">Substack 笔记</h3>
         <div class="card-grid">
-          <Card title={`<span class="hand-circle">同一个 Claude，两种打开方式</span>`}>
-            <p>比较 chat 和 CLI 两种入口，更在意持久化、可恢复性和<span class="hand-circle">可审查性</span>。</p>
+          <Card title={`同一个 Claude，两种打开方式`}>
+            <p>比较 chat 和 CLI 两种入口，更在意持久化、可恢复性和可审查性。</p>
           </Card>
-          <Card title={`<span class="hand-circle">现在是买入 NVIDIA 的好时机吗？</span>`}>
+          <Card title={`现在是买入 NVIDIA 的好时机吗？`}>
             <p>区分好公司和好价格，讨论护城河、需求、估值、预期和反转条件。写判断和真正买入不是一回事。</p>
           </Card>
         </div>
@@ -410,35 +404,35 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       <section id="likes" data-word="LIKES">
         <h2 class="section-title">我喜欢什么</h2>
         <div class="interest-grid">
-          <Card title={`<span class="hand-circle">🎬 剧</span>`}>
+          <Card title={`🎬 剧`}>
             <p>权力的游戏 · 龙之家族 · 继承之战 · 亿万 · 王冠 · 纸牌屋 · 浴血黑帮 · 太平洋战争 · 海豹突击队 · 唐顿庄园 · 金装律师 · 盾牌 · 后翼弃兵 · 钢铁侠 · 蝙蝠侠 · 漫威</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">🎵 音乐</span>`}>
+          <Card title={`🎵 音乐`}>
             <p>Hip Hop · 流行</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">🏎️ 运动</span>`}>
+          <Card title={`🏎️ 运动`}>
             <p>网球 · F1 · 车轮贴墙的极限感</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">🚗 车</span>`}>
+          <Card title={`🚗 车`}>
             <p>911 GT3 RS · Aventador SVJ · Huayra</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">🏙️ 城市</span>`}>
+          <Card title={`🏙️ 城市`}>
             <p>香港</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">🎮 游戏</span>`}>
+          <Card title={`🎮 游戏`}>
             <p>PUBG。它把团队配合推到极限：角色分工、任务分配、根据缩圈和武器配置不断调整战术。同时战斗反馈极其直接，没有多余铺垫，这是我喜欢的两个核心。</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">☕ 咖啡</span>`}>
+          <Card title={`☕ 咖啡`}>
             <p>每天必备</p>
           </Card>
 
-          <Card title={`<span class="hand-circle">🏁 短期目标</span>`}>
+          <Card title={`🏁 短期目标`}>
             <p>搭一个四轴赛车模拟器</p>
           </Card>
         </div>
@@ -449,7 +443,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
         <h2 class="section-title">联系</h2>
         <Card>
           <p>如果你在构建 AI 工具、研究公司、或想聊聊最近读的书，可以发邮件或加我微信。</p>
-          <a href="mailto:sephirxxxz@gmail.com" class="contact-email hand-circle">sephirxxxz@gmail.com</a>
+          <a href="mailto:sephirxxxz@gmail.com" class="contact-email">sephirxxxz@gmail.com</a>
           <p class="contact-wechat">微信：19816894652</p>
           <div class="contact-links" aria-label="项目与账号">
             <a href="https://github.com/sephirxxxz" target="_blank" rel="noopener noreferrer">GitHub</a>
