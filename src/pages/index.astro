@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Card from '../components/Card.astro';
 import BookCard from '../components/BookCard.astro';
+import { relationshipBooks } from '../data/relationship-books';
 
 const title = '李潇然 | 项目、笔记和判断';
 const description = '会用 AI 工具，热爱探索科技产品，习惯在不舒服的场景里学习适应的人。';
@@ -47,6 +48,8 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
       <a href="#workflow" data-section="workflow" class="progress-green" aria-label="工作流"></a>
       <a href="#featured-books" data-section="featured-books" aria-label="年度推荐"></a>
       <a href="#more-books" data-section="more-books" aria-label="其他在读"></a>
+      <a href="#relationship-books" data-section="relationship-books" aria-label="关系与组织书单"></a>
+      <a href="#internship" data-section="internship" aria-label="实习工作系统"></a>
       <a href="#thinking" data-section="thinking" aria-label="最近在想"></a>
       <a href="#likes" data-section="likes" aria-label="我喜欢什么"></a>
       <a href="#contact" data-section="contact" aria-label="联系"></a>
@@ -281,6 +284,39 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
             note={`投资条款说到底只有两类：<span class="hand-circle">经济条款和控制条款</span>。拆条款时，先分清它影响的是回报还是权力。`}
           />
         </div>
+      </section>
+
+      <!-- 关系与组织书单 -->
+      <section id="relationship-books" data-word="RELATIONSHIPS">
+        <h2 class="section-title">关系与组织</h2>
+        <p class="section-lede">这组书来自我的关系与组织阅读序列：先理解人和沟通，再理解影响力、向上管理和组织中的权力。这里公开的是我的提炼，不上传原书文件。</p>
+        <div class="book-scroll">
+          {relationshipBooks.map((book) => <BookCard {...book} />)}
+        </div>
+      </section>
+
+      <!-- 实习工作系统 -->
+      <section id="internship" data-word="INTERNSHIP">
+        <h2 class="section-title">实习工作系统</h2>
+        <p class="section-lede">把实习笔记收敛成一套可迁移的方法：先降低沟通成本，再交付有用结果，最后让结果被正确看见。</p>
+        <div class="card-grid">
+          <Card title={`<span class="hand-circle">接任务</span>`} label="01 · 对齐">
+            <p>先确认任务最终支持什么判断、截止时间、交付形式、质量标准，以及时间不够时优先保哪一部分。</p>
+          </Card>
+          <Card title={`<span class="hand-circle">推进</span>`} label="02 · 透明">
+            <p>让进度可见。卡住 30–60 分钟就缩小问题、带着上下文和选项提问，不要等到截止前才暴露风险。</p>
+          </Card>
+          <Card title={`<span class="hand-circle">交付</span>`} label="03 · 结论">
+            <p>每次交付都给结论、证据、不确定性和下一步，而不是只丢一堆材料。把一次任务沉淀成团队可以复用的资产。</p>
+          </Card>
+          <Card title={`<span class="hand-circle">关系</span>`} label="04 · 边界">
+            <p>公开场合给面子，私下场合给事实；共享功劳，不传播未经确认的信息，也不把同事和导师当成情绪或资源工具。</p>
+          </Card>
+        </div>
+        <Card title={`<span class="hand-circle">每周复盘</span>`} label="05 · 复用" variant="featured" accent="blue">
+          <p>每周问自己：我交付了什么可以复用的东西？有没有提前暴露风险？导师是否需要追我？下周最重要的一件事是什么？</p>
+          <p class="section-note">公开版只分享可迁移的工作方法，不包含雇主、客户、deal、内部数据或聊天记录。</p>
+        </Card>
       </section>
 
       <!-- 最近在想 -->

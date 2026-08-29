@@ -15,6 +15,11 @@ const sourceContracts = [
   ['Twitter card metadata', /name="twitter:card"/],
   ['GitHub project evidence link', /github\.com\/sephirxxxz\/finance-expert-team/],
   ['AI Mapper evidence link', /github\.com\/sephirxxxz\/ai-mapper-agent/],
+  ['relationship reading section', /id="relationship-books"/],
+  ['internship operating system section', /id="internship"/],
+  ['relationship progress link', /href="#relationship-books"/],
+  ['internship progress link', /href="#internship"/],
+  ['public internship advice', /实习工作系统/],
   ['correct Claude Code spelling', /Claude Code/],
   ['muted contact color token', /color: var\(--muted\)/],
 ];

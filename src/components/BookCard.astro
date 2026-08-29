@@ -1,19 +1,31 @@
 ---
 interface Props {
-  cover: string;
+  cover?: string;
   title: string;
   author: string;
   note: string;
+  status?: 'read' | 'reading' | 'to-read';
 }
 
-const { cover, title, author, note } = Astro.props;
+const { cover, title, author, note, status } = Astro.props;
 const plainTitle = title.replace(/<[^>]*>/g, '');
+const statusLabel = {
+  read: '已读',
+  reading: '在读',
+  'to-read': '待读',
+}[status ?? ''];
 ---
 
 <div class="book-card">
-  <img src={cover} alt={plainTitle} class="book-cover" loading="lazy" />
+  {cover ? (
+    <img src={cover} alt={plainTitle} class="book-cover" loading="lazy" />
+  ) : (
+    <div class="book-cover book-cover--placeholder" aria-hidden="true">
+      <span>{plainTitle}</span>
+    </div>
+  )}
   <div class="book-info">
-    <div class="label">{author}</div>
+    <div class="label">{statusLabel ? `${statusLabel} · ` : ''}{author}</div>
     <h3><Fragment set:html={title} /></h3>
     <p><Fragment set:html={note} /></p>
   </div>

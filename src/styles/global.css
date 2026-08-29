@@ -416,6 +416,10 @@ h2 {
   border-bottom-color: #16a34a;
 }
 
+#internship h2 {
+  border-bottom-color: #2563eb;
+}
+
 #focus h2::after,
 #startups h2::after,
 #workflow h2::after {
@@ -442,12 +446,14 @@ h2 {
 #doing h2,
 #workflow h2,
 #more-books h2,
+#relationship-books h2,
 #likes h2 {
   margin-left: clamp(42px, 12vw, 180px);
 }
 
 #focus h2,
 #featured-books h2,
+#internship h2,
 #thinking h2 {
   margin-right: clamp(24px, 8vw, 120px);
   margin-left: auto;
@@ -521,6 +527,10 @@ p:last-child {
   border-top-color: #16a34a;
 }
 
+#internship .card {
+  border-top-color: #2563eb;
+}
+
 .card--accent-blue,
 .card--accent-indigo,
 .card--accent-red,
@@ -573,6 +583,18 @@ p:last-child {
   background: linear-gradient(to right, var(--wash) 0 72%, transparent 72%);
   font-size: clamp(1.35rem, 3vw, 2rem);
   font-weight: 850;
+}
+
+.section-lede {
+  max-width: 62ch;
+  margin-bottom: 32px;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.section-note {
+  color: var(--muted);
+  font-size: 0.82rem;
 }
 
 .section-subtitle:nth-of-type(even) {
@@ -643,6 +665,19 @@ p:last-child {
   border-radius: 0;
   filter: grayscale(1) contrast(1.08);
   transition: filter 250ms cubic-bezier(0.22, 1, 0.36, 1), transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.book-cover--placeholder {
+  display: grid;
+  align-items: end;
+  padding: 20px;
+  color: var(--surface);
+  background: var(--ink);
+  font-family: var(--font-sans);
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 850;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
 }
 
 .book-card:hover .book-cover {
@@ -843,6 +878,8 @@ p:last-child {
   #likes h2,
   #focus h2,
   #featured-books h2,
+  #relationship-books h2,
+  #internship h2,
   #thinking h2,
   #startups h2,
   #contact h2 {
