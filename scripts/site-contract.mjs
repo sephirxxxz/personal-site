@@ -21,6 +21,8 @@ const sourceContracts = [
   ['relationship progress link', /href="#relationship-books"/],
   ['internship progress link', /href="#internship"/],
   ['public internship advice', /实习工作系统/],
+  ['English working capability', /English as a working language/],
+  ['English information fluency', /英文播客、阅读技术文档和研究材料/],
   ['white site background', /--paper:\s*#fff;/],
   ['red-gold palette', /--accent-red:[\s\S]*--accent-gold:/],
   ['correct Claude Code spelling', /Claude Code/],
