@@ -1,62 +1,46 @@
 ---
-import '../styles/global.css';
-import Card from '../components/Card.astro';
-import BookCard from '../components/BookCard.astro';
-import { relationshipBooks } from '../data/relationship-books';
-
-const title = '李潇然 | 项目、笔记和判断';
-const description = '会用 AI 工具，热爱探索科技产品，习惯在不舒服的场景里学习适应的人。';
-const siteUrl = 'https://lixiaoran-personal-site.pages.dev';
-const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+import '../../styles/global.css';
+import './preview.css';
+import Card from '../../components/Card.astro';
+import BookCard from '../../components/BookCard.astro';
+import { relationshipBooks } from '../../data/relationship-books';
+const { direction } = Astro.props;
+const chapters = [{"id":"hero","label":"顶部"},{"id":"about","label":"我是谁"},{"id":"doing","label":"我在做什么"},{"id":"focus","label":"我相信什么"},{"id":"startups","label":"我觉得有意思的 AI 产品"},{"id":"workflow","label":"工作流"},{"id":"featured-books","label":"年度推荐"},{"id":"more-books","label":"其他在读"},{"id":"relationship-books","label":"关系与组织书单"},{"id":"internship","label":"实习工作系统"},{"id":"thinking","label":"最近在想"},{"id":"likes","label":"我喜欢什么"},{"id":"contact","label":"联系"}];
 ---
-
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="zh_CN" />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <title>{title}</title>
+    <meta name="robots" content="noindex" />
+    <title>线条与导航原型 · 李潇然</title>
   </head>
-  <body>
+  <body data-direction={direction}>
     <a class="skip-link" href="#main-content">跳到主要内容</a>
-    <div class="site-bg" aria-hidden="true">
-      <span class="site-bg__text">SCPHRLX</span>
-    </div>
-    <nav class="section-progress" aria-label="页面进度">
-      <div class="section-progress__meta" aria-hidden="true">
-        <span>阅读进度 · <span data-current-section>顶部</span></span>
-        <span class="section-progress__percent" data-reading-percent>0%</span>
-      </div>
-      <div class="section-progress__links">
-        <a href="#hero" data-section="hero" aria-label="顶部" class="active" aria-current="location"><span class="section-progress__dot" aria-hidden="true"></span><span>顶部</span></a>
-        <a href="#about" data-section="about" aria-label="我是谁"><span class="section-progress__dot" aria-hidden="true"></span><span>我是谁</span></a>
-        <a href="#doing" data-section="doing" aria-label="我在做什么"><span class="section-progress__dot" aria-hidden="true"></span><span>我在做什么</span></a>
-        <a href="#focus" data-section="focus" aria-label="我相信什么"><span class="section-progress__dot" aria-hidden="true"></span><span>我相信什么</span></a>
-        <a href="#startups" data-section="startups" aria-label="我觉得有意思的 AI 产品"><span class="section-progress__dot" aria-hidden="true"></span><span>我觉得有意思的 AI 产品</span></a>
-        <a href="#workflow" data-section="workflow" aria-label="工作流"><span class="section-progress__dot" aria-hidden="true"></span><span>工作流</span></a>
-        <a href="#featured-books" data-section="featured-books" aria-label="年度推荐"><span class="section-progress__dot" aria-hidden="true"></span><span>年度推荐</span></a>
-        <a href="#more-books" data-section="more-books" aria-label="其他在读"><span class="section-progress__dot" aria-hidden="true"></span><span>其他在读</span></a>
-        <a href="#relationship-books" data-section="relationship-books" aria-label="关系与组织书单"><span class="section-progress__dot" aria-hidden="true"></span><span>关系与组织书单</span></a>
-        <a href="#internship" data-section="internship" aria-label="实习工作系统"><span class="section-progress__dot" aria-hidden="true"></span><span>实习工作系统</span></a>
-        <a href="#thinking" data-section="thinking" aria-label="最近在想"><span class="section-progress__dot" aria-hidden="true"></span><span>最近在想</span></a>
-        <a href="#likes" data-section="likes" aria-label="我喜欢什么"><span class="section-progress__dot" aria-hidden="true"></span><span>我喜欢什么</span></a>
-        <a href="#contact" data-section="contact" aria-label="联系"><span class="section-progress__dot" aria-hidden="true"></span><span>联系</span></a>
-      </div>
-      <div class="section-progress__track" role="progressbar" aria-label="阅读进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-        <div class="section-progress__fill"></div>
-      </div>
+    <nav class="glass-nav" aria-label="页面章节导航">
+      {direction !== 'axis' && <svg class="nav-ring" width="28" height="28" viewBox="0 0 28 28" role="progressbar" aria-label="阅读进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <circle cx="14" cy="14" r="11" class="ring-track" />
+        <circle cx="14" cy="14" r="11" class="ring-fill" />
+      </svg>}
+      <button class="index-trigger" aria-haspopup="dialog" aria-controls="chapter-directory">
+        <span data-current-label>顶部</span>
+        <span aria-hidden="true">⌄</span>
+      </button>
+      {direction === 'axis' && <div class="chapter-ticks">
+        {chapters.map((chapter, i) => <a href={`#${chapter.id}`} data-chapter={chapter.id} aria-label={chapter.label} title={chapter.label} class:list={['chapter-tick', { active: i === 0 }]} aria-current={i === 0 ? 'location' : undefined}>
+          <span>{String(i + 1).padStart(2, '0')}</span>
+          <span class="tick-line" aria-hidden="true"></span>
+        </a>)}
+      </div>}
+      {direction === 'quiet' && <span class="nav-percent" data-percent aria-hidden="true">0%</span>}
+      {direction === 'corner' && <div class="step-controls"><button data-step="-1" aria-label="上一章节" disabled>←</button><button data-step="1" aria-label="下一章节">→</button></div>}
+      {direction === 'axis' && <div class="axis-track" role="progressbar" aria-label="阅读进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-axis-fill></span></div>}
     </nav>
+    <dialog id="chapter-directory" class="chapter-directory" aria-labelledby="directory-title">
+      <div class="directory-heading"><h2 id="directory-title">章节目录</h2><button data-close aria-label="关闭目录">×</button></div>
+      <div class="directory-links">
+        {chapters.map((chapter,i) => <a href={`#${chapter.id}`} data-chapter={chapter.id} aria-current={i === 0 ? 'location' : undefined}><span>{String(i+1).padStart(2,'0')}</span>{chapter.label}</a>)}
+      </div>
+    </dialog>
     <div class="container">
       <!-- Hero -->
       <header id="hero" class="hero">
@@ -473,8 +457,9 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
     </footer>
     </div>
 
+
     <script>
-      import '../scripts/reading-progress';
+      import './preview';
     </script>
   </body>
 </html>

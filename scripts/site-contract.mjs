@@ -7,7 +7,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const index = fs.readFileSync(path.join(root, 'src/pages/index.astro'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'src/styles/global.css'), 'utf8');
 const relationshipBooks = fs.readFileSync(path.join(root, 'src/data/relationship-books.ts'), 'utf8');
-const source = `${index}\n${styles}`;
+const motion = fs.readFileSync(path.join(root, 'src/scripts/reading-progress.ts'), 'utf8');
+const source = `${index}\n${styles}\n${motion}`;
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 
 const sourceContracts = [
@@ -23,8 +24,15 @@ const sourceContracts = [
   ['public internship advice', /实习工作系统/],
   ['English working capability', /English as a working language/],
   ['English information fluency', /英文播客、阅读技术文档和研究材料/],
-  ['white site background', /--paper:\s*#fff;/],
-  ['red-gold palette', /--accent-red:[\s\S]*--accent-gold:/],
+  ['baby blue site background', /--paper:\s*#dceef8;/],
+  ['warm beige buttons', /--button:\s*#f3e7d5;/],
+  ['blue accent palette', /--accent-blue:\s*#477b9d;/],
+  ['glass navigation', /backdrop-filter:\s*blur\(16px\)/],
+  ['reading progress semantics', /role="progressbar"/],
+  ['active section semantics', /aria-current/],
+  ['reduced motion navigation', /reducedMotion\.matches \? 'instant' : 'smooth'/],
+  ['native keyboard navigation', /event\.detail === 0/],
+  ['touch-safe hover', /@media \(hover: hover\) and \(pointer: fine\)/],
   ['correct Claude Code spelling', /Claude Code/],
   ['muted contact color token', /color: var\(--muted\)/],
 ];

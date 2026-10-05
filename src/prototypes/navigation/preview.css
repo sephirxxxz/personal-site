@@ -1,0 +1,137 @@
+/* Exploration only. No production imports from this surface. */
+:root { --nav-offset: 88px; }
+.container { padding-top: var(--nav-offset); }
+.hero { min-height: min(760px, 88svh); }
+.hero, section, .site-footer { border-color: rgb(35 59 80 / 16%); }
+h2 { text-shadow: none; }
+.glass-nav {
+  position: fixed; z-index: 30; top: max(14px, env(safe-area-inset-top)); left: 50%;
+  transform: translateX(-50%); display:flex; align-items:center; gap:10px;
+  height:56px; padding:5px 10px; border-radius:28px; border:1px solid rgb(255 255 255 / 75%);
+  background:#e7f1f7;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 95%), inset 0 -1px 0 rgb(110 155 182 / 15%),
+    0 2px 4px rgb(35 59 80 / 4%), 0 12px 30px rgb(35 59 80 / 9%);
+}
+@supports ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
+  .glass-nav, .chapter-directory {
+    background: linear-gradient(140deg, rgb(255 255 255 / 40%), rgb(255 255 255 / 12%) 60%, rgb(208 231 246 / 22%));
+    backdrop-filter:blur(14px) saturate(145%);
+    -webkit-backdrop-filter:blur(14px) saturate(145%);
+  }
+}
+.glass-nav button, .chapter-directory button, .directory-links a {
+  min-height:44px; border-radius:22px; padding:8px 14px; border:1px solid rgb(81 67 51 / 12%);
+  color:var(--button-ink); background:rgb(243 231 213 / 86%); font-family:var(--font-body);
+  font-size:13px; font-weight:600; cursor:pointer; box-shadow:inset 0 1px 0 rgb(255 255 255 / 75%);
+  transition:transform 120ms var(--ease-out);
+}
+.glass-nav .index-trigger { display:flex; justify-content:space-between; gap:14px; width:200px; }
+[data-current-label] { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.nav-percent { min-width:35px; color:var(--ink-soft); font:11px var(--font-mono); font-variant-numeric:tabular-nums; }
+.nav-ring { flex:0 0 auto; }
+.nav-ring circle { fill:none; stroke-width:1.5; }
+.ring-track { stroke:rgb(71 123 157 / 20%); }
+.ring-fill { stroke:var(--accent-blue); stroke-dasharray:69.115; stroke-dashoffset:69.115; transform:rotate(-90deg); transform-origin:14px 14px; }
+.glass-nav button:active, .chapter-tick:active, .directory-links a:active { transform:scale(.97); }
+.glass-nav button:disabled { opacity:.4; cursor:default; transform:none; }
+.glass-nav button:focus-visible, .chapter-tick:focus-visible, .directory-links a:focus-visible, .chapter-directory button:focus-visible { outline:2px solid var(--focus); outline-offset:2px; transition:none; }
+@media (hover:hover) and (pointer:fine) {
+  .glass-nav button:not(:disabled):hover, .directory-links a:hover, .chapter-directory button:hover { background:var(--button-hover); }
+  .chapter-tick:hover { background:var(--button-hover); }
+}
+.chapter-directory {
+  position:fixed; top:80px; bottom:auto; left:50%; right:auto; transform:translateX(-50%);
+  width:min(380px, calc(100% - 32px)); max-height:calc(100dvh - 170px);
+  padding:16px; border:1px solid rgb(255 255 255 / 85%); border-radius:24px;
+  color:var(--ink); background:#e7f1f7; overflow:auto;
+  box-shadow:0 20px 60px rgb(35 59 80 / 18%), inset 0 1px 0 white;
+}
+.chapter-directory::backdrop { background:rgb(35 59 80 / 8%); }
+.directory-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+.chapter-directory h2 { margin:0; border:0; padding:0; font-size:18px; }
+.directory-heading button { width:44px; font-size:20px; }
+.directory-links { display:grid; gap:5px; }
+.directory-links a { display:flex; align-items:center; gap:14px; text-decoration:none; }
+.directory-links a > span { color:#705b43; font:10px var(--font-mono); }
+.directory-links a[aria-current] { background:var(--button-active); border-color:rgb(81 67 51 / 28%); }
+@starting-style { .chapter-directory[open] { opacity:0; } }
+.chapter-directory[open] { transition:opacity 160ms var(--ease-out); }
+.chapter-directory[data-instant="true"][open] { opacity:1; transition:none; }
+@supports ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
+  .chapter-directory {
+    background:linear-gradient(140deg, rgb(255 255 255 / 65%), rgb(240 247 251 / 55%));
+    backdrop-filter:blur(14px) saturate(145%);
+    -webkit-backdrop-filter:blur(14px) saturate(145%);
+  }
+}
+
+/* Direction 1 — light horizontal rules; one disclosure for the full index. */
+[data-direction="quiet"] .card { border-top:1px solid rgb(35 59 80 / 20%); }
+[data-direction="quiet"] h2 { border-bottom:1px solid rgb(35 59 80 / 28%); padding-bottom:14px; }
+[data-direction="quiet"] h2::after { display:none; }
+[data-direction="quiet"] :is(#focus,#startups,#workflow,#internship) h2 { border-bottom-color:rgb(35 59 80 / 28%); }
+[data-direction="quiet"] :is(#focus,#startups,#workflow,#internship) .card { border-top-color:rgb(35 59 80 / 20%); }
+[data-direction="quiet"] .hero-motto, [data-direction="quiet"] .book-info { border-top-width:1px; }
+[data-direction="quiet"] .hero::after { border-width:1px; opacity:.55; }
+[data-direction="quiet"] .hero-name { border-left-color:rgb(35 59 80 / 25%); }
+[data-direction="quiet"] .hero-tags { border-color:rgb(35 59 80 / 18%); }
+
+/* Direction 2 — vertical spines and points, direct chapter access. */
+[data-direction="axis"] .glass-nav { width:min(840px,calc(100% - 28px)); gap:8px; padding:5px 10px; border-radius:20px; }
+[data-direction="axis"] .index-trigger { flex:0 0 150px; }
+.chapter-ticks { display:flex; min-width:0; overflow-x:auto; scrollbar-width:none; overscroll-behavior-x:contain; }
+.chapter-tick {
+  flex:0 0 44px; display:flex; flex-direction:column; justify-content:center; align-items:center;
+  width:44px; height:44px; gap:5px; border-radius:12px; background:rgb(243 231 213 / 45%);
+  color:var(--button-ink); text-decoration:none; font:10px var(--font-mono);
+  transition:transform 120ms var(--ease-out);
+}
+.tick-line { height:5px; width:1px; background:currentColor; opacity:.4; }
+.chapter-tick.active { background:var(--button-active); }
+.chapter-tick.active .tick-line { width:12px; height:2px; opacity:1; }
+.axis-track { position:absolute; bottom:1px; left:18px; right:18px; height:2px; overflow:hidden; }
+.axis-track span { display:block; height:100%; background:var(--accent-blue); transform:scaleX(0); transform-origin:left; }
+[data-direction="axis"] section { border-bottom:0; }
+[data-direction="axis"] .card { border-top:0; border-left:1px solid rgb(71 123 157 / 32%); padding-left:24px; }
+[data-direction="axis"] .card::before {
+  display:block; content:""; position:absolute; top:26px; left:-3px; width:5px; height:5px;
+  border-radius:50%; background:var(--accent-blue);
+}
+[data-direction="axis"] h2 { border:0; padding-left:16px; }
+[data-direction="axis"] h2::before { content:""; position:absolute; left:0; top:8px; bottom:8px; width:2px; background:var(--accent-blue); }
+[data-direction="axis"] h2::after { display:none; }
+[data-direction="axis"] .book-info { border-top:0; border-left:1px solid var(--line); padding-left:18px; }
+[data-direction="axis"] .hero-motto { border-top:1px solid var(--line); }
+
+/* Direction 3 — whitespace and short marks; navigation off the main axis. */
+[data-direction="corner"] .glass-nav { left:auto; right:18px; transform:none; border-radius:18px; gap:6px; }
+[data-direction="corner"] .index-trigger { width:132px; border-radius:12px; }
+.step-controls { display:flex; gap:3px; }
+.step-controls button { padding:0; width:44px; border-radius:12px; }
+[data-direction="corner"] .chapter-directory { left:auto; right:18px; transform:none; }
+[data-direction="corner"] section, [data-direction="corner"] .hero, [data-direction="corner"] .site-footer { border:0; }
+[data-direction="corner"] .card { border:0; padding-left:26px; }
+[data-direction="corner"] .card::before { display:block; content:""; position:absolute; top:27px; left:0; width:12px; height:1px; background:var(--accent-blue); }
+[data-direction="corner"] h2 { border:0; padding-top:18px; }
+[data-direction="corner"] h2::before { content:""; position:absolute; top:0; left:0; width:28px; height:1px; background:var(--accent-blue); }
+[data-direction="corner"] h2::after, [data-direction="corner"] .hero::after { display:none; }
+[data-direction="corner"] .book-info { border-top:1px solid rgb(71 123 157 / 20%); }
+[data-direction="corner"] .hero-motto { border-top:0; }
+[data-direction="corner"] .hero-tags { border-color:rgb(71 123 157 / 20%); }
+
+@media (max-width:700px) {
+  .glass-nav { max-width:calc(100% - 24px); }
+  .glass-nav .index-trigger { width:180px; }
+  [data-direction="axis"] .index-trigger { flex-basis:96px; }
+  [data-direction="corner"] .glass-nav { right:12px; }
+  [data-direction="corner"] .index-trigger { width:110px; }
+  [data-direction="corner"] .chapter-directory { right:16px; }
+  .hero { min-height:auto; }
+}
+@media (prefers-reduced-transparency:reduce) {
+  .glass-nav,.chapter-directory { background:#e7f1f7; backdrop-filter:none; -webkit-backdrop-filter:none; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .glass-nav button:active, .chapter-tick:active, .directory-links a:active { transform:none; }
+  .chapter-directory[open] { transition:none; }
+}

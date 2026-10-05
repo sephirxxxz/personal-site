@@ -1,0 +1,60 @@
+---
+import '../../styles/global.css';
+import './layout.css';
+import Content from './Content.astro';
+const { direction } = Astro.props;
+const chapters = [{"id":"hero","label":"顶部"},{"id":"about","label":"我是谁"},{"id":"doing","label":"我在做什么"},{"id":"focus","label":"我相信什么"},{"id":"startups","label":"我觉得有意思的 AI 产品"},{"id":"workflow","label":"工作流"},{"id":"featured-books","label":"年度推荐"},{"id":"more-books","label":"其他在读"},{"id":"relationship-books","label":"关系与组织书单"},{"id":"internship","label":"实习工作系统"},{"id":"thinking","label":"最近在想"},{"id":"likes","label":"我喜欢什么"},{"id":"contact","label":"联系"}];
+---
+<html lang="zh-CN">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="robots" content="noindex"/><title>完整网站重设计 · 李潇然</title></head>
+<body data-layout={direction}>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+  <nav class="compact-nav" aria-label="页面章节">
+    {direction !== 'reader' && <span class="nav-brand">LX</span>}
+    <button data-open-index aria-haspopup="dialog" aria-controls="layout-index"><span data-current-label>顶部</span><span aria-hidden="true">⌄</span></button>
+    <span class="compact-percent" data-percent aria-hidden="true">0%</span>
+    <div class="compact-track" role="progressbar" aria-label="阅读进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-progress-fill></span></div>
+  </nav>
+  {direction === 'archive' && <aside class="archive-index" aria-label="常驻章节目录">
+    <a class="archive-brand" href="#hero" data-destination="hero">Li, Xiaoran</a>
+    <p class="index-caption">PERSONAL FILE · 2026</p>
+    <nav aria-label="章节索引">{chapters.map((chapter,i)=><a href={`#${chapter.id}`} data-destination={chapter.id}><span aria-hidden="true">{String(i).padStart(2,'0')}</span>{chapter.label}</a>)}</nav>
+  </aside>}
+  <dialog id="layout-index" class="layout-index" aria-labelledby="layout-index-title">
+    <div class="index-header"><h2 id="layout-index-title">章节目录</h2><button data-close-index aria-label="关闭目录">×</button></div>
+    <nav aria-label="全部章节">{chapters.map((chapter,i)=><a href={`#${chapter.id}`} data-destination={chapter.id}><span aria-hidden="true">{String(i).padStart(2,'0')}</span>{chapter.label}</a>)}</nav>
+  </dialog>
+  <div class="layout-shell">
+    <header id="hero" class="new-hero">
+      {direction !== 'reader' && <p class="profile-eyebrow">PERSONAL FILE · 2026</p>}
+      {direction !== 'reader' && <div class="identity">
+        <h1>李潇然</h1>
+        <p class="romanized">Li, Xiaoran</p>
+      </div>}
+      <div class="profile-statement">
+        {direction === 'reader'
+          ? <h1 class="subtitle">会用 AI 工具，热爱探索科技产品，习惯在不舒服的场景里学习适应的人。</h1>
+          : <p class="subtitle">会用 AI 工具，热爱探索科技产品，习惯在不舒服的场景里学习适应的人。</p>}
+        <p class="hero-motto" aria-label="个人信条">INTENSE, DOGGED, AND FUN.</p>
+      </div>
+      {direction !== 'reader' && <div class="hero-tags" aria-label="能力关键词">
+              <span class="tag">AI Native</span>
+              <span class="tag">Method Sort</span>
+              <span class="tag">Product Compress</span>
+              <span class="tag">Research Judge</span>
+              <span class="tag">Review Proof</span>
+      </div>}
+      <nav class="hero-jumps" aria-label="从这里开始">
+        <a href="#doing" data-destination="doing">我在做什么 <span aria-hidden="true">↗</span></a>
+        <a href="#featured-books" data-destination="featured-books">年度推荐 <span aria-hidden="true">↗</span></a>
+        <a href="#contact" data-destination="contact">联系 <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <Content direction={direction} />
+        <footer class="site-footer">
+      <p class="footer-note"><span class="footer-heart" aria-hidden="true">♡</span> Designed by <a href="https://sq.zzzhizhi.com" target="_blank" rel="noreferrer">SingularQuest</a></p>
+    </footer>
+  </div>
+  <script>import './interactions';</script>
+</body>
+</html>

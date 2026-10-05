@@ -1,17 +1,26 @@
 :root {
-  --paper: #fff;
-  --surface: #fff;
-  --ink: #171717;
-  --ink-soft: #3f3f46;
-  --muted: #71717a;
-  --line: #d4d4d8;
-  --wash: #f4f4f5;
-  --wash-strong: #e4e4e7;
-  --focus: #8f1d2c;
-  --accent-red: #b32631;
-  --accent-red-deep: #7f1d1d;
-  --accent-gold: #c7921e;
-  --accent-gold-soft: #f3e7bf;
+  --paper: #dceef8;
+  --surface: #f0f7fb;
+  --ink: #233b50;
+  --ink-soft: #3c5365;
+  --muted: #536a7b;
+  --line: #abc4d4;
+  --wash: #c9e1ef;
+  --wash-strong: #b5d5e8;
+  --focus: #285f86;
+  --accent-blue: #477b9d;
+  --button: #f3e7d5;
+  --button-hover: #ead8bd;
+  --button-active: #dfc7a5;
+  --button-ink: #514333;
+  /* Compatibility aliases for existing section accent classes. */
+  --accent-red: var(--accent-blue);
+  --accent-red-deep: #315d7a;
+  --accent-gold: #8a7050;
+  --accent-gold-soft: var(--button);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --nav-offset: 144px;
+  color-scheme: light;
   --font-sans: "Arial Narrow", "Aptos Narrow", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-body: "Aptos", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
@@ -27,7 +36,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+  scroll-padding-top: var(--nav-offset);
   background: var(--paper);
 }
 
@@ -91,8 +101,9 @@ a:focus-visible,
   left: 12px;
   z-index: 20;
   padding: 8px 12px;
-  color: var(--surface);
-  background: var(--ink);
+  color: var(--button-ink);
+  background: var(--button);
+  border-radius: 12px;
   transform: translateY(-180%);
 }
 
@@ -104,14 +115,11 @@ a:focus-visible,
   position: relative;
   width: 100%;
   margin: 0;
-  padding: 0 var(--page-pad);
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: var(--nav-offset) var(--page-pad) 0;
   overflow: clip;
-  background: color-mix(in oklch, var(--surface) 84%, transparent);
-  backdrop-filter: blur(22px) saturate(140%);
-  -webkit-backdrop-filter: blur(22px) saturate(140%);
-  box-shadow:
-    inset 0 0 0 1px color-mix(in oklch, var(--ink) 10%, transparent),
-    0 0 90px color-mix(in oklch, var(--ink) 6%, transparent);
+  background: transparent;
 }
 
 .hero {
@@ -245,7 +253,6 @@ a:focus-visible,
   font-weight: 900;
   line-height: 0.75;
   letter-spacing: -0.04em;
-  filter: grayscale(1);
 }
 
 .hero-name {
@@ -487,15 +494,11 @@ p:last-child {
   padding: 20px 0 28px clamp(18px, 3vw, 32px);
   border-top: 4px solid var(--ink);
   background: transparent;
-  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  /* Static reading rows: non-interactive content should not move on hover. */
 }
 
 .card::before {
   display: none;
-}
-
-.card:hover {
-  transform: translateX(6px);
 }
 
 #focus .card {
@@ -650,7 +653,7 @@ p:last-child {
   object-fit: cover;
   border-radius: 0;
   filter: grayscale(1) contrast(1.08);
-  transition: filter 250ms cubic-bezier(0.22, 1, 0.36, 1), transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 160ms var(--ease-out);
 }
 
 .book-cover--placeholder {
@@ -666,9 +669,11 @@ p:last-child {
   letter-spacing: -0.03em;
 }
 
-.book-card:hover .book-cover {
-  filter: grayscale(0) contrast(1);
-  transform: translateY(-4px);
+@media (hover: hover) and (pointer: fine) {
+  .book-card:hover .book-cover {
+    filter: grayscale(0) contrast(1);
+    transform: translateY(-3px);
+  }
 }
 
 .book-info {
@@ -772,38 +777,136 @@ p:last-child {
   transform: translateY(0.08em);
 }
 
+/* Frosted glass is reserved for the floating navigation, not the whole page. */
 .section-progress {
   position: fixed;
-  top: 50%;
-  left: clamp(12px, 2.2vw, 30px);
-  z-index: 5;
+  top: max(12px, env(safe-area-inset-top));
+  left: 50%;
+  z-index: 10;
+  width: min(calc(100% - 32px), 1100px);
+  padding: 12px 14px 10px;
+  border: 1px solid rgb(255 255 255 / 80%);
+  border-radius: 24px;
+  background: #edf5fa;
+  box-shadow: 0 8px 28px rgb(35 59 80 / 10%), inset 0 1px 0 rgb(255 255 255 / 90%);
+  transform: translateX(-50%);
+}
+
+@supports ((backdrop-filter: blur(16px)) or (-webkit-backdrop-filter: blur(16px))) {
+  .section-progress {
+    background: rgb(240 247 251 / 70%);
+    backdrop-filter: blur(16px) saturate(135%);
+    -webkit-backdrop-filter: blur(16px) saturate(135%);
+  }
+}
+
+.section-progress__meta {
   display: flex;
-  flex-direction: column;
-  gap: 9px;
-  transform: translateY(-50%);
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 4px 8px;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.section-progress__percent {
+  font-variant-numeric: tabular-nums;
+}
+
+.section-progress__links {
+  display: flex;
+  gap: 6px;
+  padding: 4px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.section-progress a,
+.contact-links a,
+.contact-email,
+.not-found a,
+button,
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid rgb(81 67 51 / 15%);
+  border-radius: 14px;
+  color: var(--button-ink);
+  background: var(--button);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 70%);
+  text-decoration: none;
+  transition: transform 120ms var(--ease-out);
 }
 
 .section-progress a {
-  display: block;
-  width: 16px;
-  height: 2px;
-  background: var(--line);
-  text-decoration: none;
-  transform-origin: left center;
-  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), background 180ms ease;
+  flex: 0 0 auto;
+  gap: 7px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.section-progress__dot {
+  width: 5px;
+  height: 5px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.35;
 }
 
 .section-progress a.active {
-  background: var(--ink);
-  transform: scaleX(2.6);
+  border-color: rgb(81 67 51 / 36%);
+  background: var(--button-active);
 }
 
-.section-progress a.progress-red.active {
-  background: var(--accent-red);
+.section-progress a.active .section-progress__dot {
+  opacity: 1;
 }
 
-.section-progress a.progress-gold.active {
-  background: var(--accent-gold);
+@media (hover: hover) and (pointer: fine) {
+  :is(.section-progress a, .contact-links a, .contact-email, .not-found a, button, .button):hover {
+    background: var(--button-hover);
+  }
+}
+
+:is(.section-progress a, .contact-links a, .contact-email, .not-found a, button, .button):active {
+  transform: scale(0.97);
+}
+
+:is(.section-progress a, .contact-links a, .contact-email, .not-found a, button, .button):focus-visible {
+  transition: none;
+}
+
+.section-progress__track {
+  height: 3px;
+  margin: 8px 4px 0;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.section-progress__fill {
+  height: 100%;
+  background: var(--accent-blue);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .section-progress {
+    background: #edf5fa;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 @media (max-width: 900px) {
@@ -821,7 +924,18 @@ p:last-child {
 
 @media (max-width: 700px) {
   .section-progress {
-    display: none;
+    width: calc(100% - 20px);
+    padding-inline: 10px;
+    border-radius: 20px;
+  }
+
+  .section-progress a {
+    padding-inline: 12px;
+  }
+
+  .contact-email {
+    max-width: 100%;
+    font-size: clamp(1rem, 4.6vw, 1.6rem);
   }
 
   .hero {
@@ -834,19 +948,28 @@ p:last-child {
   }
 
   .hero-edge--left {
-    left: -12px;
+    top: 12px;
+    left: 0;
   }
 
   .hero-edge--right {
-    right: -12px;
+    right: 0;
+    bottom: 24px;
+    flex-direction: row;
   }
 
-  .hero-edge::before {
-    height: 48px;
+  .hero-edge::before,
+  .hero-edge::after,
+  .hero-edge__index {
+    display: none;
   }
 
-  .hero-edge::after {
-    height: 22px;
+  .hero-edge__text {
+    writing-mode: horizontal-tb;
+  }
+
+  .hero-edge--left .hero-edge__text {
+    transform: none;
   }
 
   .hero-intro {
@@ -941,6 +1064,11 @@ p:last-child {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  :is(.section-progress a, .contact-links a, .contact-email, .not-found a, button, .button):active,
+  .book-card:hover .book-cover {
+    transform: none;
+  }
+
   html {
     scroll-behavior: auto;
   }

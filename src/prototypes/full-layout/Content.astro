@@ -1,99 +1,18 @@
 ---
-import '../styles/global.css';
-import Card from '../components/Card.astro';
-import BookCard from '../components/BookCard.astro';
-import { relationshipBooks } from '../data/relationship-books';
-
-const title = '李潇然 | 项目、笔记和判断';
-const description = '会用 AI 工具，热爱探索科技产品，习惯在不舒服的场景里学习适应的人。';
-const siteUrl = 'https://lixiaoran-personal-site.pages.dev';
-const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+import Card from '../../components/Card.astro';
+import BookCard from '../../components/BookCard.astro';
+import { relationshipBooks } from '../../data/relationship-books';
+const { direction } = Astro.props;
 ---
-
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="zh_CN" />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <title>{title}</title>
-  </head>
-  <body>
-    <a class="skip-link" href="#main-content">跳到主要内容</a>
-    <div class="site-bg" aria-hidden="true">
-      <span class="site-bg__text">SCPHRLX</span>
-    </div>
-    <nav class="section-progress" aria-label="页面进度">
-      <div class="section-progress__meta" aria-hidden="true">
-        <span>阅读进度 · <span data-current-section>顶部</span></span>
-        <span class="section-progress__percent" data-reading-percent>0%</span>
-      </div>
-      <div class="section-progress__links">
-        <a href="#hero" data-section="hero" aria-label="顶部" class="active" aria-current="location"><span class="section-progress__dot" aria-hidden="true"></span><span>顶部</span></a>
-        <a href="#about" data-section="about" aria-label="我是谁"><span class="section-progress__dot" aria-hidden="true"></span><span>我是谁</span></a>
-        <a href="#doing" data-section="doing" aria-label="我在做什么"><span class="section-progress__dot" aria-hidden="true"></span><span>我在做什么</span></a>
-        <a href="#focus" data-section="focus" aria-label="我相信什么"><span class="section-progress__dot" aria-hidden="true"></span><span>我相信什么</span></a>
-        <a href="#startups" data-section="startups" aria-label="我觉得有意思的 AI 产品"><span class="section-progress__dot" aria-hidden="true"></span><span>我觉得有意思的 AI 产品</span></a>
-        <a href="#workflow" data-section="workflow" aria-label="工作流"><span class="section-progress__dot" aria-hidden="true"></span><span>工作流</span></a>
-        <a href="#featured-books" data-section="featured-books" aria-label="年度推荐"><span class="section-progress__dot" aria-hidden="true"></span><span>年度推荐</span></a>
-        <a href="#more-books" data-section="more-books" aria-label="其他在读"><span class="section-progress__dot" aria-hidden="true"></span><span>其他在读</span></a>
-        <a href="#relationship-books" data-section="relationship-books" aria-label="关系与组织书单"><span class="section-progress__dot" aria-hidden="true"></span><span>关系与组织书单</span></a>
-        <a href="#internship" data-section="internship" aria-label="实习工作系统"><span class="section-progress__dot" aria-hidden="true"></span><span>实习工作系统</span></a>
-        <a href="#thinking" data-section="thinking" aria-label="最近在想"><span class="section-progress__dot" aria-hidden="true"></span><span>最近在想</span></a>
-        <a href="#likes" data-section="likes" aria-label="我喜欢什么"><span class="section-progress__dot" aria-hidden="true"></span><span>我喜欢什么</span></a>
-        <a href="#contact" data-section="contact" aria-label="联系"><span class="section-progress__dot" aria-hidden="true"></span><span>联系</span></a>
-      </div>
-      <div class="section-progress__track" role="progressbar" aria-label="阅读进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-        <div class="section-progress__fill"></div>
-      </div>
-    </nav>
-    <div class="container">
-      <!-- Hero -->
-      <header id="hero" class="hero">
-        <div class="hero-edge hero-edge--left" aria-hidden="true">
-          <span class="hero-edge__index">01</span>
-          <span class="hero-edge__text">PERSONAL PROFILE</span>
-        </div>
-        <div class="hero-edge hero-edge--right" aria-hidden="true">
-          <span class="hero-edge__text">SEPHIRX · 2026</span>
-          <span class="hero-edge__index">LX</span>
-        </div>
-        <p class="hero-index" aria-hidden="true">PERSONAL FILE · 2026</p>
-        <div class="hero-nameplate">
-          <div class="hero-monogram" aria-hidden="true">LX</div>
-          <div class="hero-name">
-            <h1>李<br />潇然</h1>
-            <p class="romanized">Li, Xiaoran</p>
-          </div>
-          <div class="hero-intro">
-            <p class="subtitle">会用 AI 工具，热爱探索科技产品，习惯在不舒服的场景里学习适应的人。</p>
-            <p class="hero-motto" aria-label="个人信条">INTENSE, DOGGED, AND FUN.</p>
-            <div class="hero-tags" aria-label="能力关键词">
-              <span class="tag">AI Native</span>
-              <span class="tag">Method Sort</span>
-              <span class="tag">Product Compress</span>
-              <span class="tag">Research Judge</span>
-              <span class="tag">Review Proof</span>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <main id="main-content">
+<main id="main-content">
 
       <!-- 我是谁 -->
       <section id="about" data-word="ABOUT ME">
-        <h2>我是谁</h2>
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">01 · ABOUT ME</span>}
+          <h2>我是谁</h2>
+        </div>
+        <div class="chapter-body">
         <Card>
           <p>关注 AI 软件、公司研究、投资判断和 tools for thought。相信好的工作来自"少而深"的判断，而不是堆材料。</p>
           <div class="about-ability">
@@ -102,11 +21,16 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
             <p>英语已经是我的工作语言：我可以自然参与英文沟通，直接听英文播客、阅读技术文档和研究材料，并把关键信息整理成判断和行动。</p>
           </div>
         </Card>
+      </div>
       </section>
 
       <!-- 我在做什么 -->
       <section id="doing" data-word="EXPERIENCE">
-        <h2 class="section-title">我在做什么</h2>
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">02 · EXPERIENCE</span>}
+          <h2 class="section-title">我在做什么</h2>
+        </div>
+        <div class="chapter-body">
         <div class="card-grid">
           <Card title={`明论资本 · FA 实习生`} label="实习">
             <p>跟 GP 做前端 deal sourcing。用 X Mapper / AI Mapper Agent 发现 AI 项目和人才线索，用 Exa 给 Agent 提供搜索输入，用 Context Mode 优化上下文处理，把"值得 reach"的判断沉淀成可复用规则。</p>
@@ -129,11 +53,16 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
             <p>用真金白银测试对 AI 基础设施、财报、竞争、估值和叙事的判断，包括 NVIDIA 研究。写判断和真正买入不是一回事。</p>
           </Card>
         </div>
+      </div>
       </section>
 
       <!-- 我相信什么 -->
       <section id="focus" data-word="BELIEFS">
-        <h2 class="section-title">我相信什么</h2>
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">03 · BELIEFS</span>}
+          <h2 class="section-title">我相信什么</h2>
+        </div>
+        <div class="chapter-body">
         <div class="card-grid">
           <Card title={`AI 的工作流压缩`}>
             <p>哪些复杂工作会被 AI 压缩成"一句话一个结果"？我在找那些工作流程会被重新定义的赛道。</p>
@@ -148,11 +77,16 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
             <p>怎么把一次判断变成下一次的输入？我在搭一套可记录、可验证、可迭代的判断系统。</p>
           </Card>
         </div>
+      </div>
       </section>
 
       <!-- 我关注的 startups -->
       <section id="startups" data-word="STARTUPS">
-        <h2 class="section-title">我觉得有意思的 AI 产品</h2>
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">04 · STARTUPS</span>}
+          <h2 class="section-title">我觉得有意思的 AI 产品</h2>
+        </div>
+        <div class="chapter-body">
         <div class="card-grid">
           <Card title={`Perplexity`}>
             <p>它的 onboarding 很短，却让我立刻理解了这个产品该怎么用。这种"先教你用，再给你功能"的设计，比堆特性更难做。</p>
@@ -178,11 +112,16 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
             <p>它不一样的地方在于，AI 对话的上下文不只是你输入了什么，而是你正在看什么。它实时感知屏幕，所以不用反复解释背景，交互从问答变成陪伴式的协助。</p>
           </Card>
         </div>
+      </div>
       </section>
 
       <!-- 工作流 -->
       <section id="workflow" data-word="WORKFLOW">
-        <h2 class="section-title">工作流</h2>
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">05 · WORKFLOW</span>}
+          <h2 class="section-title">工作流</h2>
+        </div>
+        <div class="chapter-body">
         <div class="card-grid">
           <Card title={`信息流`}>
             <p>少即是多。一天只看几篇高质量文章和行业研报，不刷大量自媒体。剩下的时间留给经典的书。</p>
@@ -202,11 +141,16 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
             <img src="/images/idea-demo-final.png" alt="从想法到最终产物的 AI 工作流" class="workflow-image" />
           </Card>
         </div>
+      </div>
       </section>
 
       <!-- 年度推荐 -->
       <section id="featured-books" data-word="READING">
-        <h2 class="section-title">年度推荐</h2>
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">06 · READING</span>}
+          <h2 class="section-title">年度推荐</h2>
+        </div>
+        <div class="chapter-body">
         <div class="book-scroll">
           <BookCard
             cover="/covers/zero-to-one.jpg"
@@ -236,11 +180,16 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
             note={`知识的增长来自更好的解释，而不是更多数据。判断一家公司，我会看它是否提供了当前最好的解释；如果出现更好的解释，我也愿意更新判断。确定性不是起点，是不断被反驳和修正后接近的结果。`}
           />
         </div>
+      </div>
       </section>
 
       <!-- 其他在读 -->
       <section id="more-books" data-word="LIBRARY">
-        <h2 class="section-title">其他在读</h2>
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">07 · LIBRARY</span>}
+          <h2 class="section-title">其他在读</h2>
+        </div>
+        <div class="chapter-body">
         <div class="book-scroll">
           <BookCard
             cover="/covers/power-law.jpg"
@@ -291,20 +240,30 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
             note={`投资条款说到底只有两类：经济条款和控制条款。拆条款时，先分清它影响的是回报还是权力。`}
           />
         </div>
+      </div>
       </section>
 
       <!-- 关系与组织书单 -->
       <section id="relationship-books" data-word="RELATIONSHIPS">
-        <h2 class="section-title">关系与组织</h2>
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">08 · RELATIONSHIPS</span>}
+          <h2 class="section-title">关系与组织</h2>
+        </div>
+        <div class="chapter-body">
         <p class="section-lede">这组书来自我的关系与组织阅读序列：先理解人和沟通，再理解影响力、向上管理和组织中的权力。这里公开的是我的提炼，不上传原书文件。</p>
         <div class="book-scroll">
           {relationshipBooks.map((book) => <BookCard {...book} />)}
         </div>
+      </div>
       </section>
 
       <!-- 实习工作系统 -->
       <section id="internship" data-word="INTERNSHIP">
-        <h2 class="section-title">实习工作系统</h2>
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">09 · INTERNSHIP</span>}
+          <h2 class="section-title">实习工作系统</h2>
+        </div>
+        <div class="chapter-body">
         <p class="section-lede">把实习笔记收敛成一套可迁移的方法：先降低沟通成本，再交付有用结果，最后让结果被正确看见。</p>
         <div class="card-grid">
           <Card title={`接任务`} label="01 · 对齐">
@@ -324,11 +283,16 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
           <p>每周问自己：我交付了什么可以复用的东西？有没有提前暴露风险？导师是否需要追我？下周最重要的一件事是什么？</p>
           <p class="section-note">公开版只分享可迁移的工作方法，不包含雇主、客户、deal、内部数据或聊天记录。</p>
         </Card>
+      </div>
       </section>
 
       <!-- 最近在想 -->
       <section id="thinking" data-word="THINKING">
-        <h2 class="section-title">最近在想</h2>
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">10 · THINKING</span>}
+          <h2 class="section-title">最近在想</h2>
+        </div>
+        <div class="chapter-body">
 
         <h3 class="section-subtitle">我读到的</h3>
         <div class="article-grid article-grid--featured">
@@ -411,11 +375,16 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
             <p>区分好公司和好价格，讨论护城河、需求、估值、预期和反转条件。写判断和真正买入不是一回事。</p>
           </Card>
         </div>
+      </div>
       </section>
 
       <!-- 我喜欢什么 -->
       <section id="likes" data-word="LIKES">
-        <h2 class="section-title">我喜欢什么</h2>
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">11 · LIKES</span>}
+          <h2 class="section-title">我喜欢什么</h2>
+        </div>
+        <div class="chapter-body">
         <div class="interest-grid">
           <Card title={`🎬 剧`}>
             <p>权力的游戏 · 龙之家族 · 继承之战 · 亿万 · 王冠 · 纸牌屋 · 浴血黑帮 · 太平洋战争 · 海豹突击队 · 唐顿庄园 · 金装律师 · 盾牌 · 后翼弃兵 · 钢铁侠 · 蝙蝠侠 · 漫威</p>
@@ -449,11 +418,16 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
             <p>搭一个四轴赛车模拟器</p>
           </Card>
         </div>
+      </div>
       </section>
 
       <!-- 联系 -->
       <section id="contact" data-word="CONTACT">
-        <h2 class="section-title">联系</h2>
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">12 · CONTACT</span>}
+          <h2 class="section-title">联系</h2>
+        </div>
+        <div class="chapter-body">
         <Card>
           <p>如果你在构建 AI 工具、研究公司、或想聊聊最近读的书，可以发邮件或加我微信。</p>
           <a href="mailto:sephirxxxz@gmail.com" class="contact-email">sephirxxxz@gmail.com</a>
@@ -465,16 +439,6 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
             <a href="https://github.com/sephirxxxz/x-mapper-skill" target="_blank" rel="noopener noreferrer">X Mapper</a>
           </div>
         </Card>
+      </div>
       </section>
-    </main>
-
-    <footer class="site-footer">
-      <p class="footer-note"><span class="footer-heart" aria-hidden="true">♡</span> Designed by <a href="https://sq.zzzhizhi.com" target="_blank" rel="noreferrer">SingularQuest</a></p>
-    </footer>
-    </div>
-
-    <script>
-      import '../scripts/reading-progress';
-    </script>
-  </body>
-</html>
+</main>
