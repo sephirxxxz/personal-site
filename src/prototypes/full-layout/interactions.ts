@@ -1,15 +1,14 @@
 const mode = document.body.dataset.layout;
-const nav = document.querySelector<HTMLElement>('.compact-nav')!;
+const nav = document.querySelector<HTMLElement>('.compact-nav');
 const directory = document.querySelector<HTMLDialogElement>('.layout-index')!;
 const openIndex = document.querySelector<HTMLButtonElement>('[data-open-index]')!;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const ease = getComputedStyle(document.documentElement).getPropertyValue('--ease-out').trim();
 const sections = [document.getElementById('hero')!, ...document.querySelectorAll<HTMLElement>('#main-content > section')];
 const destinations = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-destination]'));
-const label = document.querySelector<HTMLElement>('[data-current-label]')!;
+const label = document.querySelector<HTMLElement>('[data-current-label]');
 const percent = document.querySelector<HTMLElement>('[data-percent]');
 const fill = document.querySelector<HTMLElement>('[data-progress-fill]');
-const chapterRange = document.querySelector<HTMLInputElement>('[data-chapter-range]');
 let frame = 0;
 let suppressEnterUntil = 0;
 const animations = new Set<Animation>();
@@ -33,68 +32,30 @@ sections.forEach(section=>section.setAttribute('tabindex','-1'));
 
 function update() {
   frame=0;
+  if(!nav) return;
   const max=document.documentElement.scrollHeight-innerHeight;
   const progress=max>0 ? Math.min(1,Math.max(0,scrollY/max)) : 1;
   if(fill) fill.style.transform=`scaleX(${progress})`;
   if(percent) percent.textContent=Math.round(progress*100)+'%';
   nav.querySelector('[role="progressbar"]')?.setAttribute('aria-valuenow',String(Math.round(progress*100)));
-  // Reading position must not depend on the lowered floating control.
-  const boundary=mode==='reader' ? innerHeight*.25 : nav.getBoundingClientRect().bottom+innerHeight*.18;
+  const boundary=nav.getBoundingClientRect().bottom+innerHeight*.18;
   let active=sections[0];
   sections.forEach(section=>{ if(section.getBoundingClientRect().top<=boundary) active=section; });
   if(progress>=.999) active=sections.at(-1)!;
   const match=directory.querySelector<HTMLAnchorElement>(`[data-destination="${active.id}"]`);
-  if(match && !nav.hasAttribute('data-selecting')) {
-    label.textContent=match.textContent?.replace(/^\s*\d+\s*/,'').trim() ?? '';
-    if(chapterRange) {
-      chapterRange.value=String(sections.indexOf(active));
-      chapterRange.setAttribute('aria-valuetext',label.textContent);
-    }
-  }
+  if(match && label) label.textContent=match.textContent?.replace(/^\s*\d+\s*/,'').trim() ?? '';
   destinations.forEach(link=>{
     if(link.dataset.destination===active.id) link.setAttribute('aria-current','location');
     else link.removeAttribute('aria-current');
   });
 }
 function schedule() { if(!frame) frame=requestAnimationFrame(update); }
-addEventListener('scroll',schedule,{passive:true});
-addEventListener('resize',schedule,{passive:true});
-const sizeObserver=new ResizeObserver(schedule);
-sizeObserver.observe(document.body);
-
-// Native range: one stop per chapter, drag/click on release, immediate keyboard steps.
-if(chapterRange) {
-  const showSelection = () => {
-    const target=sections[Number(chapterRange.value)];
-    const link=directory.querySelector<HTMLAnchorElement>(`[data-destination="${target.id}"]`);
-    label.textContent=link?.textContent?.replace(/^\s*\d+\s*/,'').trim() ?? '';
-    chapterRange.setAttribute('aria-valuetext',label.textContent);
-  };
-  const endSelection = () => {
-    nav.removeAttribute('data-selecting');
-    schedule();
-  };
-  chapterRange.addEventListener('pointerdown',()=>{
-    scrollTo({top:scrollY,behavior:'instant'});
-    nav.setAttribute('data-selecting','');
-  });
-  chapterRange.addEventListener('input',showSelection);
-  chapterRange.addEventListener('change',()=>{
-    showSelection();
-    const target=sections[Number(chapterRange.value)];
-    const keyboard=document.body.dataset.input==='keyboard';
-    if(keyboard) suppressEnterUntil=performance.now()+400;
-    history.pushState(null,'','#'+target.id);
-    nav.removeAttribute('data-selecting');
-    const behavior=keyboard||reduced.matches?'instant':'smooth';
-    if(target.id==='hero') scrollTo({top:0,behavior});
-    else target.scrollIntoView({behavior,block:'start'});
-    // Keep focus on the native range so consecutive arrow keys keep working.
-  });
-  addEventListener('pointerup',endSelection,{passive:true});
-  addEventListener('pointercancel',endSelection,{passive:true});
-  addEventListener('blur',endSelection);
+if(nav) {
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule,{passive:true});
 }
+const sizeObserver=new ResizeObserver(schedule);
+if(nav) sizeObserver.observe(document.body);
 
 let exitTimer: ReturnType<typeof setTimeout> | undefined;
 let exitResolve: ((completed: boolean) => void) | undefined;

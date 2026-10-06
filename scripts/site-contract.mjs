@@ -20,7 +20,7 @@ check('reader palette', () => {
   assert.match(readerStyles, /--ink:#56616b;/);
   assert.match(readerStyles, /--button:#f3e7d5;/);
 });
-for (const pattern of [/rel="canonical"/, /property="og:title"/, /name="twitter:card"/, /name="description"/, /data-production/, /data-chapter-range/, /id="main-content"/]) {
+for (const pattern of [/rel="canonical"/, /property="og:title"/, /name="twitter:card"/, /name="description"/, /data-production/, /id="main-content"/]) {
   check(String(pattern), () => assert.match(html, pattern));
 }
 check('indexable homepage', () => assert.doesNotMatch(html, /name="robots" content="noindex"/));
@@ -35,17 +35,12 @@ for (const id of ['doing','startups','workflow','internship']) {
 }
 check('removed English capability', () => assert.doesNotMatch(html, /English as a working language|英文播客、阅读技术文档和研究材料/));
 check('no vector separator lines', () => assert.doesNotMatch(html, /<svg/));
-check('chapter slider without beige center or percentage', () => {
-  assert.match(html, /type="range" min="0" max="8" step="1"/);
-  assert.doesNotMatch(html, /data-percent|data-open-index/);
-  assert.match(readerStyles, /top:61\.8%/);
+check('no reader progress/navigation overlay', () => {
+  for(const page of [html,preview]) {
+    assert.doesNotMatch(page, /compact-nav|data-chapter-range|data-percent|data-open-index|glass-rainbow|role="progressbar"/);
+  }
 });
 check('keyboard focus retained', () => assert.match(readerStyles, /--focus:#285f86;/));
-check('glass navigation', () => assert.match(readerStyles, /backdrop-filter:blur\(8px\)/));
-check('pointer rainbow', () => {
-  assert.match(html, /glass-rainbow/);
-  assert.match(read('src/prototypes/full-layout/reader-glass.ts'), /pointerdown/);
-});
 check('reduced motion', () => assert.match(readerStyles, /prefers-reduced-motion:reduce/));
 check('pointer-safe hover', () => assert.match(readerStyles, /\(hover:hover\) and \(pointer:fine\)/));
 check('active section semantics', () => assert.match(motion, /aria-current/));

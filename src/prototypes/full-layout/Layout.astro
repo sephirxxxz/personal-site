@@ -32,21 +32,12 @@ const visibleChapters = direction === 'reader'
 </head>
 <body data-layout={direction} data-production={production ? '' : undefined}>
   <a class="skip-link" href="#main-content">跳到主要内容</a>
-  <nav class:list={['compact-nav', { 'chapter-slider': direction === 'reader' }]} aria-label="页面章节">
-    {direction === 'reader' ? <>
-      <span class="glass-effect" aria-hidden="true"><span class="glass-rainbow"></span></span>
-      <output data-current-label for="chapter-range">顶部</output>
-      <div class="chapter-range-wrap">
-        <div class="chapter-stops" aria-hidden="true">{visibleChapters.map(chapter => <span title={chapter.label}></span>)}</div>
-        <input id="chapter-range" class="chapter-range" data-chapter-range type="range" min="0" max={visibleChapters.length - 1} step="1" value="0" aria-label="板块切换" aria-valuetext="顶部"/>
-      </div>
-    </> : <>
+  {direction !== 'reader' && <nav class="compact-nav" aria-label="页面章节">
       <span class="nav-brand">LX</span>
       <button data-open-index aria-haspopup="dialog" aria-controls="layout-index"><span data-current-label>顶部</span><span aria-hidden="true">⌄</span></button>
       <span class="compact-percent" data-percent aria-hidden="true">0%</span>
       <div class="compact-track" role="progressbar" aria-label="阅读进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-progress-fill></span></div>
-    </>}
-  </nav>
+  </nav>}
   {direction === 'archive' && <aside class="archive-index" aria-label="常驻章节目录">
     <a class="archive-brand" href="#hero" data-destination="hero">Li, Xiaoran</a>
     <p class="index-caption">PERSONAL FILE · 2026</p>
@@ -87,6 +78,6 @@ const visibleChapters = direction === 'reader'
       <p class="footer-note"><span class="footer-heart" aria-hidden="true">♡</span> Designed by <a href="https://sq.zzzhizhi.com" target="_blank" rel="noreferrer">SingularQuest</a></p>
     </footer>
   </div>
-  <script>import './interactions'; import './reader-glass';</script>
+  <script>import './interactions';</script>
 </body>
 </html>
