@@ -19,7 +19,10 @@ body[data-layout="reader"] {
 [data-layout="reader"] .new-hero .hero-motto { font-weight:750; }
 [data-layout="reader"] .layout-shell #main-content :is(h2,h3) { font-weight:800; }
 
-[data-layout="reader"] .profile-statement h1.subtitle { letter-spacing:0; text-wrap:pretty; }
+[data-layout="reader"] .profile-statement h1.subtitle {
+  letter-spacing:0; text-wrap:pretty; text-align:center; max-width:none; width:100%;
+}
+[data-layout="reader"] .hero-jumps { justify-content:center; }
 
 [data-layout="reader"] :is(.hero-jumps a,.compact-nav button,.index-header button,.layout-index a,.contact-email,.contact-links a) {
   box-shadow:0 1px 2px rgb(81 67 51 / 12%),

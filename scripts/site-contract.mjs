@@ -23,6 +23,14 @@ check('reader palette', () => {
 for (const pattern of [/rel="canonical"/, /property="og:title"/, /name="twitter:card"/, /name="description"/, /data-production/, /id="main-content"/]) {
   check(String(pattern), () => assert.match(html, pattern));
 }
+check('centered ALPHA hero without button arrows', () => {
+  for(const page of [html,preview]) {
+    assert.match(page, /<h1 class="subtitle">寻找ALPHA<\/h1>/);
+    assert.doesNotMatch(page, /↗|会用 AI 工具，热爱探索科技产品/);
+  }
+  assert.match(readerStyles, /text-align:center/);
+  assert.match(readerStyles, /hero-jumps \{ justify-content:center;/);
+});
 check('indexable homepage', () => assert.doesNotMatch(html, /name="robots" content="noindex"/));
 check('non-indexed preview', () => assert.match(preview, /name="robots" content="noindex"/));
 for (const id of ['about','focus','featured-books','more-books','relationship-books','thinking','likes','contact']) {
