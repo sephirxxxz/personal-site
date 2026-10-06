@@ -127,3 +127,23 @@ html:has(body[data-layout="reader"]) { background:#dceef8; }
     color:CanvasText; background:none;
   }
 }
+
+/* One page axis for the entire reader, not a left column inside a two-column grid. */
+body[data-layout="reader"] .profile-statement { grid-template-columns:minmax(0,1fr); }
+body[data-layout="reader"] .layout-shell #main-content > section {
+  display:grid; grid-template-columns:minmax(0,1fr); gap:24px; text-align:center;
+}
+body[data-layout="reader"] .chapter-heading { position:static; margin:0; text-align:center; }
+body[data-layout="reader"] .chapter-body { width:100%; max-width:760px; margin-inline:auto; }
+body[data-layout="reader"] .layout-shell #main-content :is(h2,h3,p,li) { text-align:center; }
+body[data-layout="reader"] .layout-shell #main-content p { margin-inline:auto; }
+body[data-layout="reader"] .layout-shell #main-content .card h3 { text-align:center; }
+body[data-layout="reader"] .book-card { grid-template-columns:minmax(0,1fr); justify-items:center; }
+body[data-layout="reader"] .book-info { width:100%; text-align:center; }
+body[data-layout="reader"] .book-cover { margin-inline:auto; }
+body[data-layout="reader"] .interest-grid { grid-template-columns:minmax(0,1fr)!important; }
+body[data-layout="reader"] .material-divider img {
+  left:50%; right:auto; transform:translate(-50%,-50%);
+}
+body[data-layout="reader"] .contact-links { justify-content:center; }
+body[data-layout="reader"] .site-footer { text-align:center; }

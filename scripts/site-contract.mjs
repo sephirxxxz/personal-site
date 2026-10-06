@@ -31,6 +31,12 @@ check('centered ALPHA hero without button arrows', () => {
   assert.match(readerStyles, /text-align:center/);
   assert.match(readerStyles, /hero-jumps \{ justify-content:center;/);
 });
+check('production stylesheet order and full-reader centering', () => {
+  assert.match(read('src/prototypes/full-layout/Layout.astro'), /import '\.\/layout\.css';\s*import '\.\/reader-polish\.css';/);
+  assert.doesNotMatch(index, /import.*reader-polish\.css/);
+  assert.match(readerStyles, /body\[data-layout="reader"\] \.chapter-body \{[^}]*margin-inline:auto;/);
+  assert.match(readerStyles, /body\[data-layout="reader"\] \.layout-shell #main-content > section \{[^}]*grid-template-columns:minmax\(0,1fr\)/);
+});
 check('indexable homepage', () => assert.doesNotMatch(html, /name="robots" content="noindex"/));
 check('non-indexed preview', () => assert.match(preview, /name="robots" content="noindex"/));
 for (const id of ['about','focus','featured-books','more-books','relationship-books','thinking','likes','contact']) {
