@@ -47,6 +47,13 @@ for (const id of ['doing','startups','workflow','internship']) {
     assert.doesNotMatch(html, new RegExp('(?:id="' + id + '"|href="#' + id + '")'));
   });
 }
+check('reading follows contact', () => {
+  const order=['about','focus','thinking','likes','contact','featured-books','more-books','relationship-books'];
+  for(const page of [html,preview]) {
+    const positions=order.map(id=>page.indexOf('id="'+id+'"'));
+    assert.ok(positions.every((position,i)=>position>=0 && (i===0 || position>positions[i-1])));
+  }
+});
 check('removed English capability', () => assert.doesNotMatch(html, /English as a working language|英文播客、阅读技术文档和研究材料/));
 check('no vector separator lines', () => assert.doesNotMatch(html, /<svg/));
 check('no reader progress/navigation overlay', () => {

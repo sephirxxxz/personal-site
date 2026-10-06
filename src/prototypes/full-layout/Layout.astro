@@ -8,8 +8,11 @@ const title = '李潇然 | 项目、笔记和判断';
 const description = direction === 'reader' ? '寻找ALPHA' : '会用 AI 工具，热爱探索科技产品，习惯在不舒服的场景里学习适应的人。';
 const canonicalUrl = new URL(Astro.url.pathname, 'https://lixiaoran-personal-site.pages.dev').href;
 const chapters = [{"id":"hero","label":"顶部"},{"id":"about","label":"我是谁"},{"id":"doing","label":"我在做什么"},{"id":"focus","label":"我相信什么"},{"id":"startups","label":"我觉得有意思的 AI 产品"},{"id":"workflow","label":"工作流"},{"id":"featured-books","label":"年度推荐"},{"id":"more-books","label":"其他在读"},{"id":"relationship-books","label":"关系与组织书单"},{"id":"internship","label":"实习工作系统"},{"id":"thinking","label":"最近在想"},{"id":"likes","label":"我喜欢什么"},{"id":"contact","label":"联系"}];
+const readerChapters = chapters.filter(chapter => !['doing','startups','workflow','internship'].includes(chapter.id));
+const readingIds = ['featured-books','more-books','relationship-books'];
 const visibleChapters = direction === 'reader'
-  ? chapters.filter(chapter => !['doing','startups','workflow','internship'].includes(chapter.id))
+  ? [...readerChapters.filter(chapter => !readingIds.includes(chapter.id)),
+     ...readerChapters.filter(chapter => readingIds.includes(chapter.id))]
   : chapters;
 ---
 <html lang="zh-CN">

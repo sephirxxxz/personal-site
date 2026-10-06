@@ -1,0 +1,119 @@
+---
+import BookCard from '../../components/BookCard.astro';
+import MaterialDivider from './MaterialDivider.astro';
+import { relationshipBooks } from '../../data/relationship-books';
+const { direction } = Astro.props;
+---
+      <!-- 年度推荐 -->
+      <section id="featured-books" data-word="READING">
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">06 · READING</span>}
+          <h2 class="section-title">年度推荐</h2>
+        </div>
+        <div class="chapter-body">
+        {direction === 'reader' && <MaterialDivider kind="memory" />}
+        <div class="book-scroll">
+          <BookCard
+            cover="/covers/zero-to-one.jpg"
+            title={`Zero to One`}
+            author="Peter Thiel"
+            note={`真正从 0 到 1 的创业不是找到一个 idea，而是找到一个别人还没看到的 secret，并用一个可闭环的结构把它变成垄断。这让我看项目时先问'这件事的商业逻辑能不能自己闭环'，再问'它能做多大'。`}
+          />
+
+          <BookCard
+            cover="/covers/hard-thing.jpg"
+            title={`The Hard Thing About Hard Things`}
+            author="Ben Horowitz"
+            note={`创业没有公式，CEO 最难的是管理自己的心理，并在绝境中做那些没人愿意做的决定。评估创始人不能只看增长曲线，而要看他在低谷中的行动质量。`}
+          />
+
+          <BookCard
+            cover="/covers/founder-dilemmas.jpg"
+            title={`The Founder's Dilemmas`}
+            author="Noam Wasserman"
+            note={`每个创始人都在 Rich（财富最大化）和 King（控制权）之间做选择，早期每一个决定都会锁定后续路径。看 cap table 和条款时，先问'这个 founder 到底想要什么'。`}
+          />
+
+          <BookCard
+            cover="/covers/beginning-of-infinity.jpg"
+            title={`The Beginning of Infinity`}
+            author="David Deutsch"
+            note={`知识的增长来自更好的解释，而不是更多数据。判断一家公司，我会看它是否提供了当前最好的解释；如果出现更好的解释，我也愿意更新判断。确定性不是起点，是不断被反驳和修正后接近的结果。`}
+          />
+        </div>
+      </div>
+      </section>
+
+      <!-- 其他在读 -->
+      <section id="more-books" data-word="LIBRARY">
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">07 · LIBRARY</span>}
+          <h2 class="section-title">其他在读</h2>
+        </div>
+        <div class="chapter-body">
+        <div class="book-scroll">
+          <BookCard
+            cover="/covers/power-law.jpg"
+            title={`The Power Law`}
+            author="Sebastian Mallaby"
+            note={`VC 行业的本质是幂律，一个基金的成败往往只由 1–2 笔投资决定。理解了为什么 VC 不接'好公司'，只接'可能成为唯一赢家'的公司。`}
+          />
+
+          <BookCard
+            cover="/covers/mom-test.jpg"
+            title={`The Mom Test`}
+            author="Rob Fitzpatrick"
+            note={`找用户聊天时，所有人都会骗你。这本书教我怎么问出真实需求：不问'你会不会买'，而问'你上次遇到这个问题时是怎么做的'。`}
+          />
+
+          <BookCard
+            cover="/covers/7-powers.jpg"
+            title={`7 Powers`}
+            author="Hamilton Helmer"
+            note={`商业战略的底层框架：规模经济、网络效应、品牌、垄断资源等七种力量。看项目时，先问它未来能不能建立其中一种。`}
+          />
+
+          <BookCard
+            cover="/covers/innovator-dilemma.jpg"
+            title={`The Innovator's Dilemma`}
+            author="Clayton M. Christensen"
+            note={`大公司失败不一定是因为缺少创新，而是因为它们太擅长服务当前最好的客户。看 AI 项目时，我会问：它是不是正在用一套新技术，服务一个现有巨头暂时不愿意服务的市场。`}
+          />
+
+          <BookCard
+            cover="/covers/secrets-sand-hill.jpg"
+            title={`Secrets of Sand Hill Road`}
+            author="Scott Kupor"
+            note={`VC 不是神秘行业，它的行为由 LP-GP 结构、基金存续期和 carry 机制决定。把 VC 的决策从'个人偏好'还原成'制度激励'。`}
+          />
+
+          <BookCard
+            cover="/covers/paypal-wars.jpg"
+            title={`The PayPal Wars`}
+            author="Eric Jackson"
+            note={`PayPal 的成功不是源于完美战略，而是源于高压下的快速迭代和一群愿意打仗的人。更关注早期团队的战斗力和应变能力，而不是 BP 上的计划。`}
+          />
+
+          <BookCard
+            cover="/covers/venture-deals.jpg"
+            title={`Venture Deals`}
+            author="Brad Feld & Jason Mendelson"
+            note={`投资条款说到底只有两类：经济条款和控制条款。拆条款时，先分清它影响的是回报还是权力。`}
+          />
+        </div>
+      </div>
+      </section>
+
+      <!-- 关系与组织书单 -->
+      <section id="relationship-books" data-word="RELATIONSHIPS">
+        <div class="chapter-heading">
+          {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">08 · RELATIONSHIPS</span>}
+          <h2 class="section-title">关系与组织</h2>
+        </div>
+        <div class="chapter-body">
+        <p class="section-lede">这组书来自我的关系与组织阅读序列：先理解人和沟通，再理解影响力、向上管理和组织中的权力。这里公开的是我的提炼，不上传原书文件。</p>
+        <div class="book-scroll">
+          {relationshipBooks.map((book) => <BookCard {...book} />)}
+        </div>
+      </div>
+      </section>
