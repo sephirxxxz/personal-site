@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "test:site": "node scripts/site-contract.mjs",
+    "test:site": "npm run build && node scripts/site-contract.mjs",
     "test": "npm run test:site"
   },
   "dependencies": {

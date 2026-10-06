@@ -7,8 +7,9 @@ const ease = getComputedStyle(document.documentElement).getPropertyValue('--ease
 const sections = [document.getElementById('hero')!, ...document.querySelectorAll<HTMLElement>('#main-content > section')];
 const destinations = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-destination]'));
 const label = document.querySelector<HTMLElement>('[data-current-label]')!;
-const percent = document.querySelector<HTMLElement>('[data-percent]')!;
-const fill = document.querySelector<HTMLElement>('[data-progress-fill]')!;
+const percent = document.querySelector<HTMLElement>('[data-percent]');
+const fill = document.querySelector<HTMLElement>('[data-progress-fill]');
+const chapterRange = document.querySelector<HTMLInputElement>('[data-chapter-range]');
 let frame = 0;
 let suppressEnterUntil = 0;
 const animations = new Set<Animation>();
@@ -34,15 +35,22 @@ function update() {
   frame=0;
   const max=document.documentElement.scrollHeight-innerHeight;
   const progress=max>0 ? Math.min(1,Math.max(0,scrollY/max)) : 1;
-  fill.style.transform=`scaleX(${progress})`;
-  percent.textContent=Math.round(progress*100)+'%';
-  nav.querySelector('[role="progressbar"]')!.setAttribute('aria-valuenow',String(Math.round(progress*100)));
-  const boundary=nav.getBoundingClientRect().bottom+innerHeight*.18;
+  if(fill) fill.style.transform=`scaleX(${progress})`;
+  if(percent) percent.textContent=Math.round(progress*100)+'%';
+  nav.querySelector('[role="progressbar"]')?.setAttribute('aria-valuenow',String(Math.round(progress*100)));
+  // Reading position must not depend on the lowered floating control.
+  const boundary=mode==='reader' ? innerHeight*.25 : nav.getBoundingClientRect().bottom+innerHeight*.18;
   let active=sections[0];
   sections.forEach(section=>{ if(section.getBoundingClientRect().top<=boundary) active=section; });
   if(progress>=.999) active=sections.at(-1)!;
   const match=directory.querySelector<HTMLAnchorElement>(`[data-destination="${active.id}"]`);
-  if(match) label.textContent=match.textContent?.replace(/^\s*\d+\s*/,'').trim() ?? '';
+  if(match && !nav.hasAttribute('data-selecting')) {
+    label.textContent=match.textContent?.replace(/^\s*\d+\s*/,'').trim() ?? '';
+    if(chapterRange) {
+      chapterRange.value=String(sections.indexOf(active));
+      chapterRange.setAttribute('aria-valuetext',label.textContent);
+    }
+  }
   destinations.forEach(link=>{
     if(link.dataset.destination===active.id) link.setAttribute('aria-current','location');
     else link.removeAttribute('aria-current');
@@ -53,6 +61,40 @@ addEventListener('scroll',schedule,{passive:true});
 addEventListener('resize',schedule,{passive:true});
 const sizeObserver=new ResizeObserver(schedule);
 sizeObserver.observe(document.body);
+
+// Native range: one stop per chapter, drag/click on release, immediate keyboard steps.
+if(chapterRange) {
+  const showSelection = () => {
+    const target=sections[Number(chapterRange.value)];
+    const link=directory.querySelector<HTMLAnchorElement>(`[data-destination="${target.id}"]`);
+    label.textContent=link?.textContent?.replace(/^\s*\d+\s*/,'').trim() ?? '';
+    chapterRange.setAttribute('aria-valuetext',label.textContent);
+  };
+  const endSelection = () => {
+    nav.removeAttribute('data-selecting');
+    schedule();
+  };
+  chapterRange.addEventListener('pointerdown',()=>{
+    scrollTo({top:scrollY,behavior:'instant'});
+    nav.setAttribute('data-selecting','');
+  });
+  chapterRange.addEventListener('input',showSelection);
+  chapterRange.addEventListener('change',()=>{
+    showSelection();
+    const target=sections[Number(chapterRange.value)];
+    const keyboard=document.body.dataset.input==='keyboard';
+    if(keyboard) suppressEnterUntil=performance.now()+400;
+    history.pushState(null,'','#'+target.id);
+    nav.removeAttribute('data-selecting');
+    const behavior=keyboard||reduced.matches?'instant':'smooth';
+    if(target.id==='hero') scrollTo({top:0,behavior});
+    else target.scrollIntoView({behavior,block:'start'});
+    // Keep focus on the native range so consecutive arrow keys keep working.
+  });
+  addEventListener('pointerup',endSelection,{passive:true});
+  addEventListener('pointercancel',endSelection,{passive:true});
+  addEventListener('blur',endSelection);
+}
 
 let exitTimer: ReturnType<typeof setTimeout> | undefined;
 let exitResolve: ((completed: boolean) => void) | undefined;
@@ -92,7 +134,7 @@ function closeDirectory(pointer: boolean): Promise<boolean> {
   });
 }
 
-openIndex.addEventListener('click',event=>{
+openIndex?.addEventListener('click',event=>{
   cancelDirectoryExit();
   if(mode==='reader') {
     const instant=event.detail===0;
@@ -228,7 +270,7 @@ document.addEventListener('keydown',event=>{
   if(mode==='reader' && directory.open) directory.setAttribute('data-motion-instant','');
   const target=event.target as HTMLElement;
   if(/^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName)||target.isContentEditable||event.metaKey||event.ctrlKey||event.altKey||event.shiftKey||directory.open) return;
-  if(/^[1-3]$/.test(event.key)||['ArrowLeft','ArrowRight','r','R'].includes(event.key)){
+  if(!document.body.hasAttribute('data-production') && (/^[1-3]$/.test(event.key)||['ArrowLeft','ArrowRight','r','R'].includes(event.key))){
     // A project deck owns its own arrow keys; they never switch prototypes.
     if(target.closest('.project-deck,.project-controls')) return;
     event.preventDefault();parent.postMessage({type:'prototype-key',key:event.key},location.origin);

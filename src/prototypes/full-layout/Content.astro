@@ -1,5 +1,6 @@
 ---
 import Card from '../../components/Card.astro';
+import MaterialDivider from './MaterialDivider.astro';
 import BookCard from '../../components/BookCard.astro';
 import { relationshipBooks } from '../../data/relationship-books';
 const { direction } = Astro.props;
@@ -15,17 +16,17 @@ const { direction } = Astro.props;
         <div class="chapter-body">
         <Card>
           <p>关注 AI 软件、公司研究、投资判断和 tools for thought。相信好的工作来自"少而深"的判断，而不是堆材料。</p>
-          <div class="about-ability">
+          {direction !== 'reader' && <div class="about-ability">
             <div class="label">能力 · English</div>
             <h3>English as a working language</h3>
             <p>英语已经是我的工作语言：我可以自然参与英文沟通，直接听英文播客、阅读技术文档和研究材料，并把关键信息整理成判断和行动。</p>
-          </div>
+          </div>}
         </Card>
       </div>
       </section>
 
       <!-- 我在做什么 -->
-      <section id="doing" data-word="EXPERIENCE">
+      {direction !== 'reader' && <section id="doing" data-word="EXPERIENCE">
         <div class="chapter-heading">
           {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">02 · EXPERIENCE</span>}
           <h2 class="section-title">我在做什么</h2>
@@ -54,7 +55,7 @@ const { direction } = Astro.props;
           </Card>
         </div>
       </div>
-      </section>
+      </section>}
 
       <!-- 我相信什么 -->
       <section id="focus" data-word="BELIEFS">
@@ -63,6 +64,7 @@ const { direction } = Astro.props;
           <h2 class="section-title">我相信什么</h2>
         </div>
         <div class="chapter-body">
+        {direction === 'reader' && <MaterialDivider kind="gpu" />}
         <div class="card-grid">
           <Card title={`AI 的工作流压缩`}>
             <p>哪些复杂工作会被 AI 压缩成"一句话一个结果"？我在找那些工作流程会被重新定义的赛道。</p>
@@ -81,7 +83,7 @@ const { direction } = Astro.props;
       </section>
 
       <!-- 我关注的 startups -->
-      <section id="startups" data-word="STARTUPS">
+      {direction !== 'reader' && <section id="startups" data-word="STARTUPS">
         <div class="chapter-heading">
           {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">04 · STARTUPS</span>}
           <h2 class="section-title">我觉得有意思的 AI 产品</h2>
@@ -113,10 +115,10 @@ const { direction } = Astro.props;
           </Card>
         </div>
       </div>
-      </section>
+      </section>}
 
       <!-- 工作流 -->
-      <section id="workflow" data-word="WORKFLOW">
+      {direction !== 'reader' && <section id="workflow" data-word="WORKFLOW">
         <div class="chapter-heading">
           {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">05 · WORKFLOW</span>}
           <h2 class="section-title">工作流</h2>
@@ -142,7 +144,7 @@ const { direction } = Astro.props;
           </Card>
         </div>
       </div>
-      </section>
+      </section>}
 
       <!-- 年度推荐 -->
       <section id="featured-books" data-word="READING">
@@ -151,6 +153,7 @@ const { direction } = Astro.props;
           <h2 class="section-title">年度推荐</h2>
         </div>
         <div class="chapter-body">
+        {direction === 'reader' && <MaterialDivider kind="memory" />}
         <div class="book-scroll">
           <BookCard
             cover="/covers/zero-to-one.jpg"
@@ -258,7 +261,7 @@ const { direction } = Astro.props;
       </section>
 
       <!-- 实习工作系统 -->
-      <section id="internship" data-word="INTERNSHIP">
+      {direction !== 'reader' && <section id="internship" data-word="INTERNSHIP">
         <div class="chapter-heading">
           {direction !== 'reader' && <span class="chapter-kicker" data-proto-ui aria-hidden="true">09 · INTERNSHIP</span>}
           <h2 class="section-title">实习工作系统</h2>
@@ -284,7 +287,7 @@ const { direction } = Astro.props;
           <p class="section-note">公开版只分享可迁移的工作方法，不包含雇主、客户、deal、内部数据或聊天记录。</p>
         </Card>
       </div>
-      </section>
+      </section>}
 
       <!-- 最近在想 -->
       <section id="thinking" data-word="THINKING">
@@ -293,6 +296,7 @@ const { direction } = Astro.props;
           <h2 class="section-title">最近在想</h2>
         </div>
         <div class="chapter-body">
+        {direction === 'reader' && <MaterialDivider kind="f1" />}
 
         <h3 class="section-subtitle">我读到的</h3>
         <div class="article-grid article-grid--featured">
@@ -385,6 +389,7 @@ const { direction } = Astro.props;
           <h2 class="section-title">我喜欢什么</h2>
         </div>
         <div class="chapter-body">
+        {direction === 'reader' && <MaterialDivider kind="tennis" />}
         <div class="interest-grid">
           <Card title={`🎬 剧`}>
             <p>权力的游戏 · 龙之家族 · 继承之战 · 亿万 · 王冠 · 纸牌屋 · 浴血黑帮 · 太平洋战争 · 海豹突击队 · 唐顿庄园 · 金装律师 · 盾牌 · 后翼弃兵 · 钢铁侠 · 蝙蝠侠 · 漫威</p>

@@ -4,59 +4,66 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const index = fs.readFileSync(path.join(root, 'src/pages/index.astro'), 'utf8');
-const styles = fs.readFileSync(path.join(root, 'src/styles/global.css'), 'utf8');
-const relationshipBooks = fs.readFileSync(path.join(root, 'src/data/relationship-books.ts'), 'utf8');
-const motion = fs.readFileSync(path.join(root, 'src/scripts/reading-progress.ts'), 'utf8');
-const source = `${index}\n${styles}\n${motion}`;
-const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+const read = file => fs.readFileSync(path.join(root, file), 'utf8');
+const index = read('src/pages/index.astro');
+const html = read('dist/index.html');
+const preview = read('dist/prototypes/full-layout/reader/index.html');
+const readerStyles = read('src/prototypes/full-layout/reader-polish.css');
+const motion = read('src/prototypes/full-layout/interactions.ts');
+const relationshipBooks = read('src/data/relationship-books.ts');
+let checks = 0;
+const check = (name, fn) => { fn(); checks++; };
 
-const sourceContracts = [
-  ['canonical URL', /rel="canonical"/],
-  ['Open Graph metadata', /property="og:title"/],
-  ['Twitter card metadata', /name="twitter:card"/],
-  ['GitHub project evidence link', /github\.com\/sephirxxxz\/finance-expert-team/],
-  ['AI Mapper evidence link', /github\.com\/sephirxxxz\/ai-mapper-agent/],
-  ['relationship reading section', /id="relationship-books"/],
-  ['internship operating system section', /id="internship"/],
-  ['relationship progress link', /href="#relationship-books"/],
-  ['internship progress link', /href="#internship"/],
-  ['public internship advice', /实习工作系统/],
-  ['English working capability', /English as a working language/],
-  ['English information fluency', /英文播客、阅读技术文档和研究材料/],
-  ['baby blue site background', /--paper:\s*#dceef8;/],
-  ['warm beige buttons', /--button:\s*#f3e7d5;/],
-  ['blue accent palette', /--accent-blue:\s*#477b9d;/],
-  ['glass navigation', /backdrop-filter:\s*blur\(16px\)/],
-  ['reading progress semantics', /role="progressbar"/],
-  ['active section semantics', /aria-current/],
-  ['reduced motion navigation', /reducedMotion\.matches \? 'instant' : 'smooth'/],
-  ['native keyboard navigation', /event\.detail === 0/],
-  ['touch-safe hover', /@media \(hover: hover\) and \(pointer: fine\)/],
-  ['correct Claude Code spelling', /Claude Code/],
-  ['muted contact color token', /color: var\(--muted\)/],
-];
-
-for (const [name, pattern] of sourceContracts) {
-  assert.match(source, pattern, `${name} is missing`);
+check('production reader entry', () => assert.match(index, /<Layout direction="reader" production/));
+check('reader palette', () => {
+  assert.match(readerStyles, /--paper:#dceef8;/);
+  assert.match(readerStyles, /--ink:#56616b;/);
+  assert.match(readerStyles, /--button:#f3e7d5;/);
+});
+for (const pattern of [/rel="canonical"/, /property="og:title"/, /name="twitter:card"/, /name="description"/, /data-production/, /data-chapter-range/, /id="main-content"/]) {
+  check(String(pattern), () => assert.match(html, pattern));
 }
-
-assert.doesNotMatch(index, /Cloud Code/, 'stale “Cloud Code” wording remains');
-assert.doesNotMatch(index, /var\(--text-secondary\)/, 'undefined contact color token remains');
-assert.doesNotMatch(index, /第一份实习直接进了FA 交易现场/, 'FA internship sentence should be removed');
-assert.doesNotMatch(index, /hand-circle/, 'hand-drawn circle markup remains');
-assert.doesNotMatch(styles, /hand-circle/, 'hand-drawn circle styling remains');
-assert.doesNotMatch(styles, /#db2777|#ea580c|#16a34a|#2563eb/, 'legacy accent colors remain');
-assert.match(relationshipBooks, /cover:\s*['\"][^'\"]+['\"]/,'relationship book cover metadata is missing');
-assert.equal((relationshipBooks.match(/cover:\s*['\"]/g) ?? []).length, 10, 'every relationship book needs a cover');
-assert.equal((relationshipBooks.match(/status:\s*['"]read['"]/g) ?? []).length, 10, 'all relationship books should be marked read');
-assert.doesNotMatch(relationshipBooks, /status:\s*['"]reading['"]|status:\s*['"]to-read['"]/, 'unread relationship book status remains');
-assert.match(styles, /\.tag\s*\{[\s\S]*white-space:\s*nowrap;/, 'mobile tag wrapping contract is missing');
-assert.match(styles, /\.hero-intro\s*\{[\s\S]*min-width:\s*0;/, 'mobile hero grid min-width contract is missing');
-assert.equal(packageJson.scripts['test:site'], 'node scripts/site-contract.mjs');
-
-for (const file of ['public/robots.txt', 'public/sitemap.xml', 'src/pages/404.astro']) {
-  assert.ok(fs.existsSync(path.join(root, file)), `${file} is missing`);
+check('indexable homepage', () => assert.doesNotMatch(html, /name="robots" content="noindex"/));
+check('non-indexed preview', () => assert.match(preview, /name="robots" content="noindex"/));
+for (const id of ['about','focus','featured-books','more-books','relationship-books','thinking','likes','contact']) {
+  check('remaining section ' + id, () => assert.match(html, new RegExp('id="' + id + '"')));
 }
-
-console.log(`Site contracts passed (${sourceContracts.length + 4} checks).`);
+for (const id of ['doing','startups','workflow','internship']) {
+  check('removed section and entry ' + id, () => {
+    assert.doesNotMatch(html, new RegExp('(?:id="' + id + '"|href="#' + id + '")'));
+  });
+}
+check('removed English capability', () => assert.doesNotMatch(html, /English as a working language|英文播客、阅读技术文档和研究材料/));
+check('no vector separator lines', () => assert.doesNotMatch(html, /<svg/));
+check('chapter slider without beige center or percentage', () => {
+  assert.match(html, /type="range" min="0" max="8" step="1"/);
+  assert.doesNotMatch(html, /data-percent|data-open-index/);
+  assert.match(readerStyles, /top:61\.8%/);
+});
+check('keyboard focus retained', () => assert.match(readerStyles, /--focus:#285f86;/));
+check('glass navigation', () => assert.match(readerStyles, /backdrop-filter:blur\(8px\)/));
+check('pointer rainbow', () => {
+  assert.match(html, /glass-rainbow/);
+  assert.match(read('src/prototypes/full-layout/reader-glass.ts'), /pointerdown/);
+});
+check('reduced motion', () => assert.match(readerStyles, /prefers-reduced-motion:reduce/));
+check('pointer-safe hover', () => assert.match(readerStyles, /\(hover:hover\) and \(pointer:fine\)/));
+check('active section semantics', () => assert.match(motion, /aria-current/));
+check('native modal', () => assert.match(html, /<dialog/));
+check('no prototype keyboard interception in production', () => assert.match(motion, /!document.body.hasAttribute\('data-production'\)/));
+for (const kind of ['gpu','memory','tennis','f1']) {
+  check('material asset ' + kind, () => {
+    assert.match(html, new RegExp('/prototypes/objects/' + kind + '\\.webp'));
+    assert.ok(fs.existsSync(path.join(root, 'public/prototypes/objects', kind + '.webp')));
+  });
+}
+check('all relationship books covered and read', () => {
+  assert.equal((relationshipBooks.match(/cover:\s*['"]/g) ?? []).length, 10);
+  assert.equal((relationshipBooks.match(/status:\s*['"]read['"]/g) ?? []).length, 10);
+  assert.doesNotMatch(relationshipBooks, /status:\s*['"]reading['"]|status:\s*['"]to-read['"]/);
+});
+check('no stale spelling', () => assert.doesNotMatch(html, /Cloud Code|var\(--text-secondary\)|hand-circle/));
+for (const file of ['public/robots.txt','public/sitemap.xml','src/pages/404.astro']) {
+  check(file, () => assert.ok(fs.existsSync(path.join(root, file))));
+}
+console.log(`Site contracts passed (${checks} checks).`);
