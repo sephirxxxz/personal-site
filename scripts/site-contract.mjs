@@ -66,6 +66,10 @@ for (const kind of ['gpu','memory','tennis','f1']) {
     assert.ok(fs.existsSync(path.join(root, 'public/prototypes/objects', kind + '.webp')));
   });
 }
+check('toys alternate left and right', () => {
+  assert.equal((html.match(/data-side="left"/g) ?? []).length, 2);
+  assert.equal((html.match(/data-side="right"/g) ?? []).length, 2);
+});
 check('all relationship books covered and read', () => {
   assert.equal((relationshipBooks.match(/cover:\s*['"]/g) ?? []).length, 10);
   assert.equal((relationshipBooks.match(/status:\s*['"]read['"]/g) ?? []).length, 10);

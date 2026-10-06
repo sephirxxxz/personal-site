@@ -1,6 +1,7 @@
 ---
 const { kind } = Astro.props;
+const side = kind === 'gpu' || kind === 'f1' ? 'left' : 'right';
 ---
-<div class="material-divider" aria-hidden="true">
+<div class="material-divider" data-side={side} aria-hidden="true">
   <img src={`/prototypes/objects/${kind}.webp`} alt="" width="480" height="300" loading="lazy" decoding="async" />
 </div>

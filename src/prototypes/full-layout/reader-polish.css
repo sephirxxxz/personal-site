@@ -131,7 +131,7 @@ html:has(body[data-layout="reader"]) { background:#dceef8; }
 /* One page axis for the entire reader, not a left column inside a two-column grid. */
 body[data-layout="reader"] .profile-statement { grid-template-columns:minmax(0,1fr); }
 body[data-layout="reader"] .layout-shell #main-content > section {
-  display:grid; grid-template-columns:minmax(0,1fr); gap:24px; text-align:center;
+  position:relative; display:grid; grid-template-columns:minmax(0,1fr); gap:24px; text-align:center;
 }
 body[data-layout="reader"] .chapter-heading { position:static; margin:0; text-align:center; }
 body[data-layout="reader"] .chapter-body { width:100%; max-width:760px; margin-inline:auto; }
@@ -142,8 +142,18 @@ body[data-layout="reader"] .book-card { grid-template-columns:minmax(0,1fr); jus
 body[data-layout="reader"] .book-info { width:100%; text-align:center; }
 body[data-layout="reader"] .book-cover { margin-inline:auto; }
 body[data-layout="reader"] .interest-grid { grid-template-columns:minmax(0,1fr)!important; }
-body[data-layout="reader"] .material-divider img {
-  left:50%; right:auto; transform:translate(-50%,-50%);
+/* Desktop toys flank the chapter heading, outside the centered reading column. */
+body[data-layout="reader"] .material-divider {
+  position:absolute; top:72px; left:0; right:0; height:40px; margin:0;
+}
+body[data-layout="reader"] .material-divider img { transform:translateY(-50%); }
+body[data-layout="reader"] .material-divider[data-side="left"] img { left:0; right:auto; }
+body[data-layout="reader"] .material-divider[data-side="right"] img { left:auto; right:0; }
+/* Narrow screens get an edge-aligned row so toys never overlap the heading. */
+@media (max-width:700px) {
+  body[data-layout="reader"] .material-divider {
+    position:relative; top:auto; left:auto; right:auto; height:56px; margin:0 0 16px;
+  }
 }
 body[data-layout="reader"] .contact-links { justify-content:center; }
 body[data-layout="reader"] .site-footer { text-align:center; }
